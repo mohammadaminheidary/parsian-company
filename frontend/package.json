@@ -1,0 +1,20 @@
+{
+  "name": "parsian-company",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Tailwind CSS build tools for the Parsian Django application",
+  "scripts": {
+    "build:css": "tailwindcss -i ./assets/css/input.css -o ./static/css/app.css --minify",
+    "watch:css": "tailwindcss -i ./assets/css/input.css -o ./static/css/app.css --watch",
+    "dev": "npm run watch:css",
+    "build": "npm run build:css"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@tailwindcss/cli": "4.3.3",
+    "tailwindcss": "4.3.3"
+  }
+}

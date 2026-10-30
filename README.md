@@ -2,6 +2,8 @@
 
 **Official landing page website for Parsian UPVC Workshop.**
 
+[راهنمای کامل فارسی](README.fa.md)
+
 > **Public repository · Proprietary project · All rights reserved**  
 > This repository is publicly visible for presentation and portfolio purposes only. Its source code, original designs, and content are **not open source** and may not be reused without prior written permission. See [LICENSE](LICENSE).
 
@@ -9,7 +11,7 @@
 
 This project is intended to be the official online presence of **Parsian UPVC Workshop**, giving prospective customers a clear introduction to the workshop and a convenient way to explore its products, services, completed work, and contact information.
 
-**Current status:** Project initialization and documentation. The website application, its final technology stack, and deployment configuration have **not yet been implemented** in this repository.
+**Current status:** The local Django application and Tailwind CSS development stack are installed and configured. The home route renders an empty HTML shell with CSS and JavaScript wiring; no sample page, custom Django app, or business logic is included. The planned business sections and production deployment are not yet implemented.
 
 ## About Parsian UPVC Workshop
 
@@ -41,77 +43,152 @@ The following items describe the **intended scope**, not functionality already d
 
 ## Technology stack
 
-**Proposed direction — not yet installed or finalized:**
+| Layer | Installed technology |
+| --- | --- |
+| Backend | Python 3.13.15, Django 6.1.2 |
+| Templates | Django templates with semantic HTML5 |
+| Styling | Tailwind CSS 4.3.3 and official `@tailwindcss/cli` 4.3.3 |
+| Browser logic | Vanilla JavaScript (ES modules / ES6+) |
+| Local database | SQLite, through Django's ORM |
+| Future database | PostgreSQL settings available through environment variables |
+| Frontend build tools | Node.js 24.19.0 and npm 11.17.0 used for installation |
+| Environment configuration | python-dotenv 1.2.4 |
 
-| Layer | Proposed technology | Status |
-| --- | --- | --- |
-| Structure | HTML5 and semantic markup | Planned |
-| Styling | CSS3 with responsive design | Planned |
-| Application logic | TypeScript | Planned |
-| Development/build | Node.js (active LTS), npm, and Vite | Planned |
-| Hosting | Static hosting provider, to be selected | Undecided |
-
-The implementation may be adjusted as the project requirements become clearer. No framework, dependency, backend, database, or hosting provider should be assumed to be in use until corresponding project files are committed.
+Python dependencies, including Django's transitive dependencies, are pinned in `backend/requirements.txt`. Frontend dependencies are pinned in `frontend/package.json` and `frontend/package-lock.json`. Node.js is only needed to build/watch CSS; Django renders and serves the application during development. No frontend framework or JavaScript bundler is required.
 
 ## Repository structure
 
-**Current initialization files:**
-
 ```text
 parsian-company/
-├── .gitignore     # Local files, secrets, dependencies, and build artifacts excluded from Git
-├── LICENSE        # Proprietary, all-rights-reserved terms
-└── README.md      # Project information and guidance
+├── backend/
+│   ├── config/
+│   │   ├── __init__.py
+│   │   ├── settings.py       # Environment, database, frontend paths
+│   │   ├── urls.py           # Empty template route and Django admin
+│   │   ├── asgi.py
+│   │   └── wsgi.py
+│   ├── .env                 # Local secrets; ignored by Git
+│   ├── .env.example
+│   ├── db.sqlite3           # Local database; ignored by Git
+│   ├── staticfiles/         # Collected deployment assets; ignored by Git
+│   ├── manage.py
+│   └── requirements.txt
+├── frontend/
+│   ├── assets/css/input.css # Tailwind v4 import and source discovery
+│   ├── templates/base.html  # Empty HTML shell with static asset links
+│   ├── static/
+│   │   ├── css/app.css      # Generated locally; ignored by Git
+│   │   ├── js/app.js        # Empty ES module entry point
+│   │   └── images/.gitkeep
+│   ├── package.json
+│   └── package-lock.json
+├── .gitignore
+├── run.py                   # Start backend, Tailwind, and browser
+├── LICENSE
+├── README.fa.md
+└── README.md
 ```
 
-Application directories such as `src/` and `public/`, along with a `package.json` and build configuration, can be introduced when development begins. **Update this section to reflect the actual files and directories as the project evolves.**
+The root `.venv/` is the local Python environment; `frontend/node_modules/` holds frontend build dependencies. Both are ignored by Git. Backend configuration lives in `backend/`; frontend sources live in `frontend/`. Django resolves frontend paths relative to its settings file. Collected deployment assets go to `backend/staticfiles/`. Never edit `frontend/static/css/app.css` directly.
 
 ## Installation and local development
 
 ### Prerequisites
 
+- Python 3.12–3.14 (Python 3.13 was used here), with `venv` and pip
+- Node.js 22 or newer and npm
 - Git
-- When the proposed Vite/TypeScript implementation is added: a supported **Node.js LTS** release and npm
 
-### Clone the repository
+### Set up a fresh checkout
 
 ```bash
 git clone https://github.com/mohammadaminheidary/parsian-company.git
 cd parsian-company
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r backend/requirements.txt
+npm --prefix frontend ci
+cp backend/.env.example backend/.env
+python -c "from secrets import token_urlsafe; from dotenv import set_key; set_key('backend/.env', 'DJANGO_SECRET_KEY', token_urlsafe(64))"
+python backend/manage.py migrate
+npm --prefix frontend run build:css
 ```
 
-At the present documentation-only stage, there is **no runnable website or package installation step**.
+The existing local environment has already been installed, `backend/.env` generated, and its database migrated. Do not replace an existing `backend/.env` or rotate its secret during normal startup. Django loads `backend/.env` automatically; already exported environment variables take precedence. Debug mode defaults to off if `DJANGO_DEBUG` is absent. A nonempty `DJANGO_SECRET_KEY` is required.
 
-### After the application is initialized
+### Start development
 
-Once a `package.json` and dependency lockfile are committed, the expected npm workflow for the proposed Vite-based stack will be:
+From the repository root:
 
 ```bash
-npm ci
-npm run dev
+python3 run.py
 ```
 
-To create and inspect a production build (once the corresponding scripts are defined):
+The launcher uses the project's `.venv` without manual activation. It starts Django and waits for an HTTP response, builds CSS, starts Tailwind watch mode and waits for its initial build, then opens the default browser at [the local website](http://127.0.0.1:8000/). The page is intentionally empty. Press `Ctrl+C` to stop both processes. If either process fails, the other is stopped too.
+
+Optional arguments:
 
 ```bash
-npm run build
-npm run preview
+python3 run.py --port 8001
+python3 run.py --no-browser
 ```
 
-If a lockfile has not yet been generated, the initial dependency installation should use `npm install` instead of `npm ci`. Check `package.json` for the actual scripts and tool versions once implementation starts. Do not commit `.env` files containing credentials.
+Django reloads when Python code changes. Tailwind rebuilds CSS from frontend templates and static JavaScript; browser refresh remains manual. Frontend assets are served by Django during development, so no separate frontend HTTP server is needed.
+
+To run each part independently:
+
+```bash
+source .venv/bin/activate
+python backend/manage.py runserver
+```
+
+In another terminal:
+
+```bash
+npm --prefix frontend run watch:css
+```
+
+`npm --prefix frontend run dev` aliases the watcher. The input is `frontend/assets/css/input.css`; output is `frontend/static/css/app.css`. Add `@source` entries if future templates live elsewhere, and use complete utility names for Tailwind discovery. The JavaScript entry point is empty until application behavior is added.
+
+### Build and verify
+
+```bash
+npm --prefix frontend run build:css
+python backend/manage.py check
+python backend/manage.py migrate --check
+python -m pip check
+node --check frontend/static/js/app.js
+```
+
+There are no custom application tests or models yet. The `/` route uses Django's built-in `TemplateView`; `/admin/` remains available for Django's standard admin. Development static serving requires `DJANGO_DEBUG=true`.
+
+## Database configuration
+
+`DB_ENGINE=sqlite` is the default and stores local data in `backend/db.sqlite3`. Keep models and queries portable through Django's ORM rather than relying on SQLite-specific SQL.
+
+For a future PostgreSQL deployment:
+
+1. Provision PostgreSQL and install its driver into the activated environment with `python -m pip install "psycopg[binary]"`.
+2. Add the installed driver dependencies to `backend/requirements.txt` using `python -m pip freeze > backend/requirements.txt`.
+3. Set `DB_ENGINE=postgresql`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_HOST`, and `DB_PORT` through the deployment environment (or local `backend/.env`). Set `DB_SSLMODE` to the value required by the database provider, typically `require` for hosted databases.
+4. Run `python backend/manage.py check` and `python backend/manage.py migrate` against the target database.
+
+The driver and PostgreSQL service are intentionally not installed for SQLite development. Switching the connection does not copy existing SQLite records; plan a separate data migration if there is data to preserve.
 
 ## Deployment
 
-**Not configured yet.** Once the site has been implemented and tested:
+**Hosting is not configured yet.** This application requires a Python-capable host and a production WSGI/ASGI server, to be chosen when deployment is planned.
 
-1. Select a hosting provider capable of serving the application's output (for example, a static hosting platform).
-2. Confirm the actual build commands and output directory from the committed project configuration. For the proposed Vite setup, the conventional build command is `npm run build` and the default output directory is `dist/`.
-3. Configure deployment through the chosen platform using the repository's `main` branch.
-4. Set any deployment secrets in the hosting platform's protected environment settings, not in Git.
-5. Verify the production site on desktop and mobile, including navigation, accessibility, page metadata, images, and contact links.
-6. Connect a custom domain and HTTPS only after the project owner approves the configuration.
+Before deployment:
 
-No production URL or deployment status is claimed here until a deployment has been completed.
+1. Install pinned Python and frontend dependencies; compile CSS with `npm --prefix frontend ci` and `npm --prefix frontend run build:css`.
+2. Set a unique production `DJANGO_SECRET_KEY`, `DJANGO_DEBUG=false`, and `DJANGO_ALLOWED_HOSTS` to the actual comma-separated hostnames.
+3. Configure the production database, HTTPS, secure cookies, and any trusted proxy settings for the chosen host.
+4. Run migrations and `python backend/manage.py collectstatic --noinput`. Configure the host/web server to serve `backend/staticfiles/` at `/static/`; Django's development static server is not used in production.
+5. Run `python backend/manage.py check --deploy` with production settings and resolve the findings for that environment.
+6. Verify the site, then connect a custom domain and HTTPS after project-owner approval.
+
+No production server, hosting credentials, contact integrations, or deployment have been added by the local stack setup.
 
 ## Contribution policy
 

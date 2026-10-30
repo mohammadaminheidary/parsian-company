@@ -1,0 +1,12 @@
+{% load static %}
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Parsian Company{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    <script type="module" src="{% static 'js/app.js' %}"></script>
+  </head>
+  <body>{% block content %}{% endblock %}</body>
+</html>

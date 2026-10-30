@@ -1,0 +1,5 @@
+@import "tailwindcss" source(none);
+
+/* Explicit sources avoid scanning the Python environment or generated CSS. */
+@source "../../templates";
+@source "../../static/js";

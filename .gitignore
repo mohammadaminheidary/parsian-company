@@ -62,3 +62,21 @@ temp/
 # Local hosting/platform artifacts
 .vercel/
 .netlify/
+
+# Python / Django
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+db.sqlite3
+db.sqlite3-*
+staticfiles/
+media/
+
+# Generated Tailwind output (rebuild with npm --prefix frontend run build:css)
+/frontend/static/css/app.css
