@@ -129,6 +129,9 @@ def main():
         print(f'خطا: {error}', file=sys.stderr, flush=True)
         return 1
     finally:
+        # npm may forward another interrupt while child processes are stopping.
+        signal.signal(signal.SIGINT, signal.SIG_IGN)
+        signal.signal(signal.SIGTERM, signal.SIG_IGN)
         for process in reversed(processes):
             stop(process)
     return 0

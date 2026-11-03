@@ -1,0 +1,10 @@
+{
+  "name": "parsian-company-workspace",
+  "private": true,
+  "scripts": {
+    "dev": "python3 run.py",
+    "build": "npm --prefix frontend run build",
+    "build:css": "npm --prefix frontend run build:css",
+    "watch:css": "npm --prefix frontend run watch:css"
+  }
+}
