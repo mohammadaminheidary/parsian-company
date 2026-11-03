@@ -1,0 +1,58 @@
+{% load static %}
+<header data-site-header>
+  <div class="bg-navy text-on-dark">
+    <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-6 gap-y-2 px-4 py-2.5 text-xs leading-6 sm:px-6 lg:px-8">
+      <div class="flex min-w-0 flex-wrap items-center gap-x-6 gap-y-1">
+        <span class="inline-flex items-center gap-2">
+          <svg class="size-3.5 shrink-0 text-accent" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.4 1.8.6 2.8.7a2 2 0 0 1 1.8 2.1Z"/></svg>
+          <span>تلفن: به‌زودی اعلام می‌شود</span>
+        </span>
+        <span class="inline-flex min-w-0 items-start gap-2">
+          <svg class="mt-1 size-3.5 shrink-0 text-accent" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <span class="break-words">آدرس کارگاه: به‌زودی اعلام می‌شود</span>
+        </span>
+      </div>
+      <span class="inline-flex items-start gap-2">
+        <svg class="mt-1 size-3.5 shrink-0 text-accent" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        <span>ساعات کاری: به‌زودی اعلام می‌شود</span>
+      </span>
+    </div>
+  </div>
+
+  <div class="relative z-20 border-b border-navy/10 bg-surface/85 backdrop-blur-md">
+    <div data-nav-container class="group/navbar mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-2 px-4 md:gap-x-3 lg:gap-x-4 lg:px-6 xl:gap-x-8 xl:px-8 data-[nav-layout=expanded]:flex-nowrap">
+      <a data-nav-brand class="flex min-w-0 items-center gap-2 group-data-[nav-layout=expanded]/navbar:shrink-0 group-data-[nav-layout=expanded]/navbar:whitespace-nowrap rounded-md py-3 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary sm:gap-3" href="{% url 'home' %}">
+        <img class="h-14 w-auto shrink-0 object-contain sm:h-16" src="{% static 'images/parsian_Logo.svg' %}" width="400" height="500" alt="">
+        <span class="text-sm font-bold leading-7 sm:text-base">درب و پنجره پارسیان</span>
+      </a>
+
+      <button class="group/menu-toggle relative inline-flex size-11 shrink-0 items-center justify-center rounded-lg border border-surface-blue text-ink transition-colors motion-reduce:transition-none hover:bg-surface-blue focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary" type="button" aria-controls="primary-navigation" aria-expanded="false" aria-label="باز کردن منوی اصلی" data-menu-toggle hidden>
+        <span aria-hidden="true" class="absolute h-px w-5 -translate-y-1.5 bg-current transition-[rotate,translate] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-aria-expanded/menu-toggle:translate-y-0 group-aria-expanded/menu-toggle:rotate-45 motion-reduce:transition-none"></span>
+        <span aria-hidden="true" class="absolute h-px w-5 bg-current transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-aria-expanded/menu-toggle:opacity-0 motion-reduce:transition-none"></span>
+        <span aria-hidden="true" class="absolute h-px w-5 translate-y-1.5 bg-current transition-[rotate,translate] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-aria-expanded/menu-toggle:translate-y-0 group-aria-expanded/menu-toggle:-rotate-45 motion-reduce:transition-none"></span>
+      </button>
+
+      <nav class="group-data-[nav-layout=collapsed]/navbar:absolute group-data-[nav-layout=collapsed]/navbar:inset-x-0 group-data-[nav-layout=collapsed]/navbar:top-full group-data-[nav-layout=collapsed]/navbar:max-h-[calc(100dvh-var(--nav-bottom))] group-data-[nav-layout=collapsed]/navbar:overflow-y-auto group-data-[nav-layout=collapsed]/navbar:overscroll-contain group-data-[nav-layout=collapsed]/navbar:bg-surface/95 group-data-[nav-layout=collapsed]/navbar:px-4 group-data-[nav-layout=collapsed]/navbar:backdrop-blur-md group-data-[nav-layout=collapsed]/navbar:[clip-path:inset(0_0_100%_0)] group-data-[nav-layout=collapsed]/navbar:pointer-events-none group-data-[nav-layout=collapsed]/navbar:transition-[clip-path] group-data-[nav-layout=collapsed]/navbar:duration-500 group-data-[nav-layout=collapsed]/navbar:ease-[cubic-bezier(0.22,1,0.36,1)] group-data-[nav-layout=collapsed]/navbar:delay-150 group-data-[menu-open=true]/navbar:group-data-[nav-layout=collapsed]/navbar:[clip-path:inset(0)] group-data-[menu-open=true]/navbar:group-data-[nav-layout=collapsed]/navbar:pointer-events-auto group-data-[menu-open=true]/navbar:group-data-[nav-layout=collapsed]/navbar:delay-0 motion-reduce:transition-none! flex w-full flex-col gap-4 border-t border-surface-blue py-4 group-data-[nav-layout=expanded]/navbar:w-auto group-data-[nav-layout=expanded]/navbar:min-w-max group-data-[nav-layout=expanded]/navbar:flex-1 group-data-[nav-layout=expanded]/navbar:flex-row group-data-[nav-layout=expanded]/navbar:items-center group-data-[nav-layout=expanded]/navbar:gap-2 group-data-[nav-layout=expanded]/navbar:border-0 group-data-[nav-layout=expanded]/navbar:py-0 lg:group-data-[nav-layout=expanded]/navbar:gap-4 xl:group-data-[nav-layout=expanded]/navbar:gap-6" id="primary-navigation" aria-label="ناوبری اصلی">
+        <ul class="flex flex-col gap-1 text-sm font-light group-data-[nav-layout=expanded]/navbar:flex-1 group-data-[nav-layout=expanded]/navbar:flex-row group-data-[nav-layout=expanded]/navbar:items-center group-data-[nav-layout=expanded]/navbar:justify-center group-data-[nav-layout=expanded]/navbar:gap-0 lg:group-data-[nav-layout=expanded]/navbar:gap-0.5 xl:group-data-[nav-layout=expanded]/navbar:gap-1">
+          {% url 'home' as home_url %}
+          {% with current_route=request.resolver_match.url_name %}
+            {% if current_route == 'home' %}
+              {% include 'includes/nav-link.html' with href=home_url label='صفحه اصلی' active=True only %}
+            {% else %}
+              {% include 'includes/nav-link.html' with href=home_url label='صفحه اصلی' only %}
+            {% endif %}
+          {% endwith %}
+          {% include 'includes/nav-link.html' with label='محصولات' only %}
+          {% include 'includes/nav-link.html' with label='خدمات' only %}
+          {% include 'includes/nav-link.html' with label='نمونه‌کارها' only %}
+          {% include 'includes/nav-link.html' with label='درباره ما' only %}
+          {% include 'includes/nav-link.html' with label='تماس با ما' only %}
+        </ul>
+        <a class="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-primary-strong px-3 lg:gap-3 lg:px-4 xl:px-5 py-3 text-sm font-bold text-on-dark transition-colors motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary cursor-not-allowed" role="link" aria-disabled="true" title="به‌زودی">
+          استعلام قیمت<span class="sr-only"> (به‌زودی)</span>
+          <svg class="size-4" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m6-6-6 6 6 6"/></svg>
+        </a>
+      </nav>
+    </div>
+  </div>
+</header>

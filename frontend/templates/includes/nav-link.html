@@ -1,0 +1,14 @@
+<li>
+  <a
+    class="{% if href %}group/nav-link{% else %}cursor-not-allowed{% endif %} block whitespace-nowrap px-2 py-3 lg:px-2.5 xl:px-3 text-ink focus-visible:outline-none"
+    {% if href %}href="{{ href }}"{% else %}role="link" aria-disabled="true" title="به‌زودی"{% endif %}
+    {% if active %}
+    aria-current="page"
+    {% endif %}
+  >
+    <span
+      class="relative inline-block after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-center after:scale-x-0 after:bg-primary after:content-[''] after:transition-transform after:duration-300 after:ease-out group-hover/nav-link:after:scale-x-100 group-focus-visible/nav-link:after:scale-x-100 group-focus-visible/nav-link:after:h-0.5 group-aria-[current=page]/nav-link:after:scale-x-100 motion-reduce:after:transition-none"
+      >{{ label }}{% if not href %}<span class="sr-only"> (به‌زودی)</span>{% endif %}</span
+    >
+  </a>
+</li>

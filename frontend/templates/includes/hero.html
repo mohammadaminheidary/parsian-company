@@ -1,0 +1,57 @@
+{% load static %}
+<section
+  class="relative isolate flex min-h-[30rem] items-center bg-navy text-on-dark sm:min-h-[26rem] md:aspect-[1913/822] md:min-h-0 selection:bg-navy"
+  aria-labelledby="hero-heading"
+>
+  <img
+    class="absolute inset-0 -z-20 size-full object-cover object-[32%_center] sm:object-[40%_center] md:object-center motion-safe:animate-hero-background"
+    src="{% static 'images/hero/workshop.webp' %}"
+    srcset="{% static 'images/hero/workshop-960.webp' %} 960w, {% static 'images/hero/workshop.webp' %} 1913w"
+    sizes="(max-width: 767px) 1100px, 100vw"
+    width="1913"
+    height="822"
+    alt="کارگاه گروه صنعتی پارسیان و تجهیزات ساخت درب و پنجره"
+    fetchpriority="high"
+    loading="eager"
+  />
+  <div
+    class="absolute inset-0 -z-10 bg-linear-to-l from-navy/95 via-navy/75 via-55% to-navy/45 md:from-navy md:via-navy/60 md:via-50% md:to-navy/25"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="mx-auto w-full max-w-[1920px] px-5 py-14 sm:px-[5.5%] md:py-12 lg:py-16"
+  >
+    <div class="text-start md:w-3/5">
+      <p
+        class="mb-3 text-sm font-light leading-relaxed text-accent md:mb-4 md:text-[clamp(0.75rem,1.3vw,1.5rem)] lg:mb-5 motion-safe:animate-hero-enter motion-safe:[animation-delay:100ms]"
+      >
+        زیبایی و آرامش در کنار شما
+      </p>
+      <h1
+        class="text-[clamp(2rem,4.4vw,5.25rem)] font-bold leading-tight motion-safe:animate-hero-enter motion-safe:[animation-delay:200ms]"
+        id="hero-heading"
+      >
+        گروه صنعتی پارسیان
+      </h1>
+      <p
+        class="mt-4 max-w-xl text-base font-light leading-relaxed md:mt-3 md:max-w-none md:text-[clamp(0.875rem,1.6vw,1.875rem)] lg:mt-5 motion-safe:animate-hero-enter motion-safe:[animation-delay:300ms]"
+      >
+        طراحی، ساخت و نصب درب و پنجره <bdi lang="en">UPVC</bdi> و آلومینیومی
+      </p>
+      <div
+        class="mt-8 flex flex-col gap-3 min-[400px]:flex-row md:mt-[6vw] md:gap-[1.7vw] motion-safe:animate-hero-enter motion-safe:[animation-delay:400ms]"
+      >
+        <a
+          class="inline-flex cursor-not-allowed min-h-11 items-center justify-center whitespace-nowrap rounded-md bg-primary-strong px-5 py-3 text-sm font-bold transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-on-dark motion-reduce:transition-none min-[400px]:flex-1 md:min-h-[clamp(2.75rem,3.5vw,4rem)] md:w-[17.5vw] md:max-w-80 md:flex-none md:px-3 md:py-2 md:text-[clamp(0.875rem,1.1vw,1.25rem)]"
+          role="link" aria-disabled="true" title="به‌زودی"
+          >استعلام قیمت رایگان<span class="sr-only"> (به‌زودی)</span></a
+        >
+        <a
+          class="inline-flex cursor-not-allowed min-h-11 items-center justify-center whitespace-nowrap rounded-md bg-primary-strong px-5 py-3 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-on-dark motion-reduce:transition-none min-[400px]:flex-1 md:min-h-[clamp(2.75rem,3.5vw,4rem)] md:w-[17.5vw] md:max-w-80 md:flex-none md:px-3 md:py-2 md:text-[clamp(0.875rem,1.1vw,1.25rem)]"
+          role="link" aria-disabled="true" title="به‌زودی"
+          >مشاهده نمونه‌کارها<span class="sr-only"> (به‌زودی)</span></a
+        >
+      </div>
+    </div>
+  </div>
+</section>

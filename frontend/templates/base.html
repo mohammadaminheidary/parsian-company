@@ -4,9 +4,19 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}Parsian Company{% endblock %}</title>
+    <title>{% block title %}درب و پنجره پارسیان | UPVC و آلومینیوم{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}درب و پنجره پارسیان؛ ساخت و نصب درب و پنجره UPVC و آلومینیومی.{% endblock %}">
+    <link rel="preload" href="{% static 'fonts/vazirmatn/Vazirmatn-Variable.woff2' %}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="{% static 'css/app.css' %}">
     <script type="module" src="{% static 'js/app.js' %}"></script>
   </head>
-  <body>{% block content %}{% endblock %}</body>
+  <body class="bg-surface text-ink antialiased">
+    <a class="sr-only rounded-md bg-surface px-4 py-3 text-ink focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-50 focus:outline-2 focus:outline-primary" href="#main-content">رفتن به محتوای اصلی</a>
+    {% include 'includes/header.html' %}
+    <main id="main-content" tabindex="-1">
+      {% block content %}
+        {% include 'includes/hero.html' %}
+      {% endblock %}
+    </main>
+  </body>
 </html>
