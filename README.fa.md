@@ -1,6 +1,6 @@
 # راهنمای فارسی پروژهٔ پارسیان
 
-این پروژه فعلاً فقط زیرساخت اجرای Django، Tailwind CSS و جاوااسکریپت ساده را دارد. هیچ صفحهٔ نمایشی، مدل اختصاصی، فرم، منوی آماده یا منطق کسب‌وکار در آن پیاده‌سازی نشده است. صفحهٔ اصلی عمداً خالی است؛ فقط اسکلت HTML و اتصال به CSS و JavaScript را نگه می‌دارد.
+صفحهٔ اصلی شامل هدر واکنش‌گرا و بخش معرفی فارسی و راست‌به‌چپ است. فونت محلی وزیرمتن، توکن‌های طراحی Tailwind، تصاویر بهینه و منوی موبایل با پشتیبانی صفحه‌کلید و کاهش حرکت اضافه شده‌اند. بخش‌های محصولات، خدمات، نمونه‌کارها، دربارهٔ ما، تماس و استعلام هنوز پیاده‌سازی نشده‌اند و کنترل‌های آن‌ها غیرفعال هستند. اطلاعات تماس نیز موقت است. مدل اختصاصی، فرم استعلام و استقرار واقعی هنوز وجود ندارد.
 
 ## اجرای پروژه با یک دستور
 
@@ -9,6 +9,8 @@
 ```bash
 python3 run.py
 ```
+
+`npm run dev` از ریشه یا `npm --prefix frontend run dev` نیز همین اجراکننده را راه می‌اندازد. برای اجرای مستقل Tailwind از `npm --prefix frontend run watch:css` استفاده کنید. دستورهای ریشهٔ `npm run build`، `npm run build:css` و `npm run watch:css` به اسکریپت‌های فرانت‌اند ارجاع می‌دهند. وابستگی‌های npm فقط در `frontend/` نصب می‌شوند.
 
 این فایل به‌ترتیب:
 
@@ -26,7 +28,7 @@ python3 run.py --port 8001
 python3 run.py --no-browser
 ```
 
-فرانت‌اند این پروژه سرور جداگانه ندارد: Tailwind فقط CSS را می‌سازد و Django قالب HTML، CSS و JavaScript را در محیط توسعه ارائه می‌کند. باز شدن مرورگر به‌معنی باز شدن یک صفحهٔ خالی است. بازخوانی خودکار مرورگر تنظیم نشده؛ پس از تغییر فایل‌های فرانت‌اند، صفحه را دستی تازه‌سازی کنید. Django تغییر فایل‌های پایتون را تشخیص می‌دهد و خودش دوباره اجرا می‌شود.
+فرانت‌اند این پروژه سرور جداگانه ندارد: Tailwind فقط CSS را می‌سازد و Django قالب HTML، CSS و JavaScript را در محیط توسعه ارائه می‌کند. مرورگر صفحهٔ اصلی شامل هدر و بخش معرفی را نمایش می‌دهد. بازخوانی خودکار مرورگر تنظیم نشده؛ پس از تغییر فایل‌های فرانت‌اند، صفحه را دستی تازه‌سازی کنید. Django تغییر فایل‌های پایتون را تشخیص می‌دهد و خودش دوباره اجرا می‌شود.
 
 ## ساختار پوشه‌ها
 
@@ -47,21 +49,25 @@ parsian-company/
 │   └── requirements.txt
 ├── frontend/
 │   ├── assets/
-│   │   └── css/input.css
+│   │   ├── css/input.css
+│   │   └── image/               # منابع اصلی لوگو و تصویر معرفی
 │   ├── templates/
-│   │   └── base.html
+│   │   ├── base.html
+│   │   └── includes/            # هدر، لینک منو و بخش معرفی
 │   ├── static/
 │   │   ├── css/
 │   │   │   ├── .gitkeep
 │   │   │   └── app.css
-│   │   ├── js/app.js
-│   │   └── images/.gitkeep
+│   │   ├── js/                  # app.js و header.js
+│   │   ├── fonts/vazirmatn/     # فونت محلی و مجوز OFL
+│   │   └── images/              # لوگو و تصاویر WebP
 │   ├── node_modules/
 │   ├── package.json
 │   └── package-lock.json
 ├── .venv/
 ├── .git/
 ├── .gitignore
+├── package.json                 # میان‌برهای npm از ریشه
 ├── run.py
 ├── README.md
 ├── README.fa.md
@@ -78,7 +84,7 @@ parsian-company/
 | `backend/config/` | بستهٔ اصلی پروژهٔ Django |
 | `config/__init__.py` | فایل خالی برای تعریف بستهٔ پایتونی |
 | `config/settings.py` | تنظیم پایگاه داده، محیط، امنیت، قالب‌ها و فایل‌های استاتیک؛ مسیر فرانت‌اند از محل همین فایل محاسبه می‌شود |
-| `config/urls.py` | مسیر `/` برای قالب خالی با `TemplateView` خود Django و مسیر `/admin/` برای پنل مدیریت استاندارد Django |
+| `config/urls.py` | مسیر `/` برای قالب صفحهٔ اصلی با `TemplateView` خود Django و مسیر `/admin/` برای پنل مدیریت استاندارد Django |
 | `config/asgi.py` | نقطهٔ ورود برای سرورهایی که رابط ASGI را پشتیبانی می‌کنند |
 | `config/wsgi.py` | نقطهٔ ورود برای سرورهایی که رابط WSGI را پشتیبانی می‌کنند |
 | `backend/manage.py` | ابزار خط فرمان Django برای بررسی پروژه، اجرای سرور، migration و کارهای مدیریتی |
@@ -96,20 +102,22 @@ parsian-company/
 | --- | --- |
 | `frontend/` | تمام فایل‌های رابط مرورگر و ابزار ساخت CSS |
 | `frontend/assets/` | فایل‌های ورودی ابزار ساخت که مستقیماً به مرورگر داده نمی‌شوند |
-| `frontend/assets/css/input.css` | ورودی Tailwind v4؛ شامل import و مسیر جست‌وجوی کلاس‌ها در قالب‌ها و JavaScript |
+| `frontend/assets/css/input.css` | ورودی Tailwind v4؛ شامل import، مسیر جست‌وجوی کلاس‌ها، توکن‌های طراحی، فونت و پویانمایی‌ها |
 | `frontend/templates/` | قالب‌های HTML که Django پردازش می‌کند |
-| `frontend/templates/base.html` | اسکلت حداقلی HTML5 با زبان فارسی، جهت راست‌به‌چپ و لینک CSS و ماژول JavaScript؛ بدنه خالی است |
+| `frontend/templates/base.html` | قالب مشترک فارسی و راست‌به‌چپ با فراداده، لینک پرش به محتوا، هدر و بخش معرفی |
 | `frontend/static/` | فایل‌هایی که در مرورگر دریافت می‌شوند |
 | `frontend/static/css/` | محل خروجی CSS ساخته‌شده |
 | `frontend/static/css/app.css` | خروجی خودکار Tailwind؛ ویرایش آن با ساخت بعدی از بین می‌رود |
-| `frontend/static/js/app.js` | نقطهٔ ورود JavaScript به‌صورت ES module؛ فعلاً خالی است |
-| `frontend/static/images/` | محل تصاویر آیندهٔ پروژه |
+| `frontend/static/js/app.js` | نقطهٔ ورود ES module برای راه‌اندازی منوی هدر در `header.js` |
+| `frontend/static/images/` | لوگو و تصاویر بهینهٔ بخش معرفی |
 | `.gitkeep` | فایل خالی برای نگهداری پوشهٔ بدون فایل در Git |
 | `frontend/package.json` | وابستگی‌های فرانت‌اند و دستورهای build و watch |
 | `frontend/package-lock.json` | نسخهٔ دقیق وابستگی‌های مستقیم و غیرمستقیم npm |
 | `frontend/node_modules/` | بسته‌های نصب‌شدهٔ npm؛ با `npm ci` دوباره ساخته می‌شود |
 
 در Tailwind v4 تنظیم import و مسیرهای جست‌وجو داخل CSS انجام شده است؛ برای این ساختار به `tailwind.config.js` یا تنظیم PostCSS نیاز نیست. کلاس‌ها باید به‌شکل کامل در فایل‌ها نوشته شوند تا ابزار ساخت بتواند آن‌ها را پیدا کند. اگر بعداً قالب‌ها را جای دیگری قرار دادید، مسیر `@source` مناسب را هم به `input.css` اضافه کنید.
+
+فونت محلی و مجوز SIL Open Font License در `frontend/static/fonts/vazirmatn/` نگهداری می‌شوند. منابع اصلی تصاویر در `frontend/assets/image/` و نسخه‌های قابل دریافت مرورگر در `frontend/static/images/` قرار دارند.
 
 ### فایل‌های ریشه و پوشه‌های خودکار
 
@@ -201,9 +209,10 @@ python -m pip check
 
 # بررسی نحو JavaScript
 node --check frontend/static/js/app.js
+node --check frontend/static/js/header.js
 
 # جمع‌آوری فایل‌های استاتیک برای استقرار
 python backend/manage.py collectstatic --noinput
 ```
 
-فعلاً تست اختصاصی برنامه وجود ندارد، چون قابلیت اختصاصی پیاده‌سازی نشده است. `run.py` ابزار توسعه است؛ استقرار واقعی به سرور WSGI/ASGI، ارائهٔ فایل‌های استاتیک، تنظیمات امنیتی و HTTPS متناسب با میزبان نیاز دارد.
+فعلاً مجموعه‌تست خودکار اختصاصی برنامه وجود ندارد. `run.py` ابزار توسعه است؛ استقرار واقعی به سرور WSGI/ASGI، ارائهٔ فایل‌های استاتیک، تنظیمات امنیتی و HTTPS متناسب با میزبان نیاز دارد.

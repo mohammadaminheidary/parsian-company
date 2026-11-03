@@ -11,7 +11,7 @@
 
 This project is intended to be the official online presence of **Parsian UPVC Workshop**, giving prospective customers a clear introduction to the workshop and a convenient way to explore its products, services, completed work, and contact information.
 
-**Current status:** The local Django application and Tailwind CSS development stack are installed and configured. The home route renders an empty HTML shell with CSS and JavaScript wiring; no sample page, custom Django app, or business logic is included. The planned business sections and production deployment are not yet implemented.
+**Current status:** The home route renders a responsive Persian RTL header and workshop hero, with a local Vazirmatn font, shared Tailwind design tokens, and optimized images. The mobile menu supports keyboard navigation, scroll locking, and reduced motion. Products, services, portfolio, about, contact, and quotation destinations are not implemented; their controls are marked unavailable. Contact details remain placeholders. No custom Django app, inquiry form, or production deployment is included.
 
 ## About Parsian UPVC Workshop
 
@@ -28,7 +28,7 @@ Parsian UPVC Workshop is the business represented by this website. The planned w
 
 ## Planned website sections and features
 
-The following items describe the **intended scope**, not functionality already delivered.
+The following items describe the intended full website. The header and home hero are implemented; the remaining sections are planned.
 
 | Section | Planned purpose |
 | --- | --- |
@@ -64,7 +64,7 @@ parsian-company/
 │   ├── config/
 │   │   ├── __init__.py
 │   │   ├── settings.py       # Environment, database, frontend paths
-│   │   ├── urls.py           # Empty template route and Django admin
+│   │   ├── urls.py           # Home template route and Django admin
 │   │   ├── asgi.py
 │   │   └── wsgi.py
 │   ├── .env                 # Local secrets; ignored by Git
@@ -74,15 +74,17 @@ parsian-company/
 │   ├── manage.py
 │   └── requirements.txt
 ├── frontend/
-│   ├── assets/css/input.css # Tailwind v4 import and source discovery
-│   ├── templates/base.html  # Empty HTML shell with static asset links
+│   ├── assets/css/input.css # Tailwind v4 sources, tokens, font, and animations
+│   ├── templates/base.html  # Shared RTL shell, header, and home hero
 │   ├── static/
 │   │   ├── css/app.css      # Generated locally; ignored by Git
-│   │   ├── js/app.js        # Empty ES module entry point
-│   │   └── images/.gitkeep
+│   │   ├── js/app.js        # Header initialization (header.js)
+│   │   ├── fonts/vazirmatn/ # Local font and OFL license
+│   │   └── images/          # Logo and optimized hero images
 │   ├── package.json
 │   └── package-lock.json
 ├── .gitignore
+├── package.json             # Root npm development/build shortcuts
 ├── run.py                   # Start backend, Tailwind, and browser
 ├── LICENSE
 ├── README.fa.md
@@ -124,7 +126,7 @@ From the repository root:
 python3 run.py
 ```
 
-The launcher uses the project's `.venv` without manual activation. It starts Django and waits for an HTTP response, builds CSS, starts Tailwind watch mode and waits for its initial build, then opens the default browser at [the local website](http://127.0.0.1:8000/). The page is intentionally empty. Press `Ctrl+C` to stop both processes. If either process fails, the other is stopped too.
+The launcher uses the project's `.venv` without manual activation. It starts Django and waits for an HTTP response, builds CSS, starts Tailwind watch mode and waits for its initial build, then opens the default browser at [the local website](http://127.0.0.1:8000/). The page displays the header and hero. Press `Ctrl+C` to stop both processes. If either process fails, the other is stopped too.
 
 Optional arguments:
 
@@ -148,7 +150,11 @@ In another terminal:
 npm --prefix frontend run watch:css
 ```
 
-`npm --prefix frontend run dev` aliases the watcher. The input is `frontend/assets/css/input.css`; output is `frontend/static/css/app.css`. Add `@source` entries if future templates live elsewhere, and use complete utility names for Tailwind discovery. The JavaScript entry point is empty until application behavior is added.
+`npm run dev` from the root or `npm --prefix frontend run dev` starts the full Django/Tailwind launcher. Use `npm --prefix frontend run watch:css` for the standalone watcher. Root `npm run build`, `npm run build:css`, and `npm run watch:css` forward to the frontend scripts; install dependencies in `frontend/` as shown above.
+
+The input is `frontend/assets/css/input.css`; output is `frontend/static/css/app.css`. Add `@source` entries if future templates live elsewhere, and use complete utility names for Tailwind discovery. The JavaScript entry point initializes `frontend/static/js/header.js`. Templates are composed from `frontend/templates/includes/`.
+
+Original brand/hero assets live in `frontend/assets/image/`; browser assets live in `frontend/static/images/`. The local font and its SIL Open Font License are in `frontend/static/fonts/vazirmatn/`.
 
 ### Build and verify
 
@@ -158,9 +164,10 @@ python backend/manage.py check
 python backend/manage.py migrate --check
 python -m pip check
 node --check frontend/static/js/app.js
+node --check frontend/static/js/header.js
 ```
 
-There are no custom application tests or models yet. The `/` route uses Django's built-in `TemplateView`; `/admin/` remains available for Django's standard admin. Development static serving requires `DJANGO_DEBUG=true`.
+There is no automated application test suite or custom model yet. The `/` route uses Django's built-in `TemplateView`; `/admin/` remains available for Django's standard admin. Development static serving requires `DJANGO_DEBUG=true`.
 
 ## Database configuration
 
