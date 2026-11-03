@@ -3,3 +3,57 @@
 /* Explicit sources avoid scanning the Python environment or generated CSS. */
 @source "../../templates";
 @source "../../static/js";
+
+@theme {
+  --color-navy: #082446;
+  --color-primary: #087CDE;
+  --color-primary-strong: color-mix(in srgb, #087CDE 85%, #082446);
+  --color-accent: #5ACAF3;
+  --color-ink: #183553;
+  --color-muted: #6E8294;
+  --color-surface: #FFFFFF;
+  --color-surface-soft: #F5F9FC;
+  --color-surface-blue: #E9F5FC;
+  --color-on-dark: #FFFFFF;
+  --font-sans: "Vazirmatn", Tahoma, Arial, sans-serif;
+
+  --animate-hero-background: hero-background 600ms ease-out both;
+  --animate-hero-enter: hero-enter 600ms ease-out both;
+
+  @keyframes hero-background {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes hero-enter {
+    from { opacity: 0; transform: translateY(1.25rem); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+/* Official Vazirmatn v33.003 variable font; license in static/fonts/vazirmatn/OFL.txt. */
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("../fonts/vazirmatn/Vazirmatn-Variable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@layer base {
+  body {
+    @apply font-sans font-light;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold;
+  }
+
+  p, nav a, label, input, textarea, select {
+    @apply font-light;
+  }
+
+  button, input[type="button"], input[type="submit"], input[type="reset"] {
+    @apply font-medium;
+  }
+}
