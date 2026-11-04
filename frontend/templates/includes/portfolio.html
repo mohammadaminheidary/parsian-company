@@ -1,0 +1,31 @@
+<section id="portfolio" class="bg-surface py-12 sm:py-14 lg:py-16" aria-labelledby="portfolio-heading" data-portfolio>
+  <div class="mx-auto max-w-[1600px] px-5 sm:px-8 lg:px-16 xl:px-24">
+    <div class="mb-7 grid grid-cols-1 items-center gap-x-3 gap-y-5 sm:grid-cols-[1fr_auto] sm:gap-x-6 lg:mb-8 lg:grid-cols-[1fr_auto_1fr]">
+      <div class="text-center sm:col-span-2 lg:order-2 lg:col-span-1" data-portfolio-reveal>
+        <p class="mb-1.5 text-xs font-light leading-6 text-muted sm:text-sm">کیفیت در جزئیات واقعی</p>
+        <h2 id="portfolio-heading" class="text-xl font-bold leading-relaxed text-navy sm:text-2xl xl:text-[28px]">نمونه‌کارهای اجراشده پارسیان</h2>
+      </div>
+      <div class="flex flex-wrap items-center gap-1.5 justify-self-center sm:justify-self-start lg:order-1 lg:gap-2" role="group" aria-label="دسته‌بندی نمونه‌کارها" data-portfolio-reveal>
+        <button class="min-h-11 rounded-full bg-surface-soft px-3 text-xs text-ink transition-colors hover:bg-surface-blue aria-pressed:bg-primary aria-pressed:text-on-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary motion-reduce:transition-none sm:px-4" type="button" aria-pressed="true" aria-controls="portfolio-projects" data-portfolio-filter="all" disabled>همه پروژه‌ها</button>
+        <button class="min-h-11 rounded-full bg-surface-soft px-3 text-xs text-ink transition-colors hover:bg-surface-blue aria-pressed:bg-primary aria-pressed:text-on-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary motion-reduce:transition-none sm:px-4" type="button" aria-pressed="false" aria-controls="portfolio-projects" data-portfolio-filter="upvc" disabled><bdi lang="en">UPVC</bdi></button>
+        <button class="min-h-11 rounded-full bg-surface-soft px-3 text-xs text-ink transition-colors hover:bg-surface-blue aria-pressed:bg-primary aria-pressed:text-on-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary motion-reduce:transition-none sm:px-4" type="button" aria-pressed="false" aria-controls="portfolio-projects" data-portfolio-filter="aluminium" disabled>آلومینیوم</button>
+      </div>
+      <button class="inline-flex min-h-11 items-center justify-center gap-2 justify-self-center rounded-md border border-transparent bg-primary px-3 py-2 text-[11px] font-medium leading-5 text-on-dark transition-colors duration-200 hover:bg-primary-strong focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary motion-reduce:transition-none sm:justify-self-end sm:px-4 sm:text-xs lg:order-3" type="button" aria-controls="portfolio-projects" data-portfolio-all data-portfolio-reveal disabled>
+        <span>مشاهده همه پروژه‌ها</span>
+        <svg class="size-4 shrink-0" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m6-6-6 6 6 6"/></svg>
+      </button>
+    </div>
+    <ul id="portfolio-projects" class="-mx-5 flex snap-x snap-mandatory items-start gap-4 overflow-x-auto overscroll-x-contain scroll-smooth px-10 pb-3 pt-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary motion-reduce:scroll-auto sm:-mx-8 sm:px-24 md:mx-0 md:grid md:grid-cols-5 md:overflow-visible md:px-0 md:pb-0" tabindex="0" aria-label="نمونه‌کارهای پارسیان" aria-describedby="portfolio-scroll-hint" data-portfolio-track>
+      {% include 'includes/portfolio-item.html' with title='ویلای مدرن - لواسان' category='upvc' caption='درب و پنجره UPVC' image='portfolio/lavasan-villa' alt='نمای ویلای مدرن با درهای شیشه‌ای و پنجره‌های سرتاسری رو به باغ' only %}
+      {% include 'includes/portfolio-item.html' with title='پروژه مسکونی - کرج' category='upvc' caption='پنجره‌های UPVC' image='portfolio/karaj-residence' alt='ساختمان مسکونی مدرن با پنجره‌های بزرگ و تراس چوبی' only %}
+      {% include 'includes/portfolio-item.html' with title='پنجره‌های دوجداره - تهران' category='upvc' caption='درب و پنجره UPVC' image='portfolio/tehran-windows' alt='در شیشه‌ای و پنجره‌های بلند در نمای روشن یک خانه مدرن' only %}
+      {% include 'includes/portfolio-item.html' with title='نمای آلومینیومی - شهریار' category='aluminium' caption='قاب‌های آلومینیومی' image='products/aluminium' alt='قاب‌های تیره پنجره‌های آلومینیومی در نمای سفید ساختمان' only %}
+      {% include 'includes/portfolio-item.html' with title='ساختمان اداری - اندیشه' category='aluminium' caption='نمای شیشه‌ای و آلومینیوم' image='portfolio/andisheh-office' alt='نمای ساختمان اداری با شبکه قاب‌های فلزی و شیشه‌های بازتابنده آسمان' only %}
+    </ul>
+    <p id="portfolio-scroll-hint" class="mt-4 flex items-center justify-center gap-2 text-xs font-light leading-6 text-muted md:hidden">
+      <svg class="size-5 shrink-0 motion-safe:animate-portfolio-swipe" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m8 7-5 5 5 5m8-10 5 5-5 5M3 12h18"/></svg>
+      <span>برای مشاهده پروژه‌ها بکشید<span class="sr-only">؛ برای پیمایش با صفحه‌کلید از کلیدهای پیکان استفاده کنید.</span></span>
+    </p>
+    <p class="sr-only" role="status" aria-live="polite" aria-atomic="true" data-portfolio-status></p>
+  </div>
+</section>
