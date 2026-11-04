@@ -21,6 +21,8 @@
 
   <div class="relative z-20 border-b border-navy/10 bg-surface/85 backdrop-blur-md">
     <div data-nav-container class="group/navbar mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-2 px-4 md:gap-x-3 lg:gap-x-4 lg:px-6 xl:gap-x-8 xl:px-8 data-[nav-layout=expanded]:flex-nowrap">
+      {# Collapse before first paint; navigation remains in flow without JavaScript. #}
+      <script>document.currentScript.parentElement.dataset.navLayout = 'collapsed';</script>
       <a data-nav-brand class="flex min-w-0 items-center gap-2 group-data-[nav-layout=expanded]/navbar:shrink-0 group-data-[nav-layout=expanded]/navbar:whitespace-nowrap rounded-md py-3 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary sm:gap-3" href="{% url 'home' %}">
         <img class="h-14 w-auto shrink-0 object-contain sm:h-16" src="{% static 'images/parsian_Logo.svg' %}" width="400" height="500" alt="">
         <span class="text-sm font-bold leading-7 sm:text-base">درب و پنجره پارسیان</span>

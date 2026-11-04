@@ -7,6 +7,7 @@ export function initializeProductCarousel(section) {
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   let visible = false;
   let pointerDown = false;
+  let touching = false;
   let scrolling = false;
   let automaticScroll = false;
   let lastInteraction = 0;
@@ -15,16 +16,25 @@ export function initializeProductCarousel(section) {
   let settleTimer;
   let revealed = false;
 
+  function canPlay() {
+    return mobile.matches && !reducedMotion.matches && visible && !document.hidden
+      && !pointerDown && !touching && !scrolling && !section.closest('[inert]');
+  }
+
   function schedule() {
     clearTimeout(timer);
-    if (!mobile.matches || reducedMotion.matches || !visible || document.hidden || pointerDown || scrolling) return;
+    if (!canPlay()) return;
     // Normal cadence is 3 seconds; manual input gets a full 4-second quiet period.
     const delay = Math.max(3000, lastInteraction + 4000 - Date.now());
     timer = setTimeout(advance, delay);
   }
 
   function interact() {
-    automaticScroll = false;
+    if (automaticScroll) {
+      automaticScroll = false;
+      // Stop only an in-flight autoplay animation; native gestures keep control.
+      track.scrollTo({ left: track.scrollLeft, behavior: 'instant' });
+    }
     lastInteraction = Date.now();
     schedule();
   }
@@ -57,6 +67,11 @@ export function initializeProductCarousel(section) {
   }
 
   function advance() {
+    // Recheck at execution time, including activity outside the carousel.
+    if (!canPlay() || Date.now() - lastInteraction < 4000) {
+      schedule();
+      return;
+    }
     const { current } = positions();
     // The final item cannot snap to the start when 1.5 items are visible.
     // Treat a completely visible final item as the end and gently reverse.
@@ -96,8 +111,21 @@ export function initializeProductCarousel(section) {
     reveal();
   }
 
-  track.addEventListener('pointerdown', () => { pointerDown = true; interact(); }, { passive: true });
-  track.addEventListener('pointermove', () => { if (pointerDown) interact(); }, { passive: true });
+  // Page gestures and their momentum must also suspend horizontal autoplay.
+  // Touch state survives pointercancel, which browsers fire when native panning starts.
+  document.addEventListener('touchstart', (event) => { touching = event.touches.length > 0; interact(); }, { passive: true });
+  document.addEventListener('touchmove', interact, { passive: true });
+  function releaseTouch(event) {
+    touching = event.touches.length > 0;
+    interact();
+  }
+  document.addEventListener('touchend', releaseTouch, { passive: true });
+  document.addEventListener('touchcancel', releaseTouch, { passive: true });
+  document.addEventListener('pointerdown', (event) => {
+    if (event.pointerType !== 'touch') pointerDown = true;
+    interact();
+  }, { passive: true });
+  document.addEventListener('pointermove', () => { if (pointerDown) interact(); }, { passive: true });
   function releasePointer() {
     if (!pointerDown) return;
     pointerDown = false;
@@ -105,14 +133,16 @@ export function initializeProductCarousel(section) {
   }
   window.addEventListener('pointerup', releasePointer, { passive: true });
   window.addEventListener('pointercancel', releasePointer, { passive: true });
+  document.addEventListener('scroll', interact, { passive: true });
+  document.addEventListener('wheel', interact, { passive: true });
+  document.addEventListener('click', interact);
+  document.addEventListener('keydown', interact);
   track.addEventListener('scroll', () => {
     scrolling = true;
     clearTimeout(timer);
     if (!automaticScroll) lastInteraction = Date.now();
     waitForScrollEnd();
   }, { passive: true });
-  track.addEventListener('wheel', interact, { passive: true });
-  track.addEventListener('click', interact);
   track.addEventListener('focusin', interact);
   track.addEventListener('keydown', (event) => {
     if (!mobile.matches) return;
@@ -134,7 +164,7 @@ export function initializeProductCarousel(section) {
     if (reducedMotion.matches) reveal();
     if (!mobile.matches) {
       // Clear a mobile scroll offset when switching to the desktop grid.
-      track.scrollTo({ left: 0, behavior: 'instant' });
+      if (track.scrollLeft !== 0) track.scrollTo({ left: 0, behavior: 'instant' });
       direction = 1;
     }
     schedule();
@@ -145,6 +175,7 @@ export function initializeProductCarousel(section) {
   function resetScrollState() {
     clearTimeout(settleTimer);
     pointerDown = false;
+    touching = false;
     scrolling = false;
     automaticScroll = false;
   }

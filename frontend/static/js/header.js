@@ -56,7 +56,7 @@ export function initializeHeader(header) {
     }
     toggle.setAttribute('aria-expanded', String(open));
     toggle.setAttribute('aria-label', open ? 'بستن منوی اصلی' : 'باز کردن منوی اصلی');
-    if (!open && !expanded && navigation.contains(document.activeElement)) toggle.focus();
+    if (!open && !expanded && navigation.contains(document.activeElement)) toggle.focus({ preventScroll: true });
     navigation.inert = !expanded && !open;
     if (!expanded && !open) navigation.setAttribute('aria-hidden', 'true');
     else navigation.removeAttribute('aria-hidden');
@@ -83,10 +83,10 @@ export function initializeHeader(header) {
     toggle.hidden = expanded;
     setMenuOpen(!expanded && !wasExpanded && wasOpen);
 
-    if (wasExpanded && !expanded && navigation.contains(focused)) toggle.focus();
+    if (wasExpanded && !expanded && navigation.contains(focused)) toggle.focus({ preventScroll: true });
     if (focused === toggle) {
-      if (expanded) navigation.querySelector('a[href]')?.focus();
-      else toggle.focus();
+      if (expanded) navigation.querySelector('a[href]')?.focus({ preventScroll: true });
+      else toggle.focus({ preventScroll: true });
     }
   }
 
@@ -99,7 +99,11 @@ export function initializeHeader(header) {
   });
   resizeObserver.observe(container);
   document.fonts.ready.then(updateLayout);
-  window.addEventListener('resize', updateLayout);
+  // Mobile browser chrome changes viewport height while scrolling. Only width
+  // changes (observed above) require the expanded/collapsed layout measurement.
+  window.addEventListener('resize', () => {
+    if (toggle.getAttribute('aria-expanded') === 'true') updateMenuBounds();
+  });
 
   toggle.addEventListener('click', () => {
     setMenuOpen(toggle.getAttribute('aria-expanded') !== 'true');
@@ -110,7 +114,7 @@ export function initializeHeader(header) {
     if (event.key === 'Escape') {
       event.preventDefault();
       setMenuOpen(false);
-      toggle.focus();
+      toggle.focus({ preventScroll: true });
     } else if (event.key === 'Tab') {
       const focusable = [brand, toggle, ...navigation.querySelectorAll('a[href]')];
       const first = focusable[0];
@@ -128,7 +132,7 @@ export function initializeHeader(header) {
   navigation.addEventListener('click', (event) => {
     if (!expanded && event.target.closest('a[href]')) {
       setMenuOpen(false);
-      toggle.focus();
+      toggle.focus({ preventScroll: true });
     }
   });
 
