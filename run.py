@@ -1,6 +1,7 @@
 """اجرای محیط توسعه: ابتدا Django، سپس Tailwind و در پایان مرورگر."""
 
 import argparse
+import ipaddress
 import os
 from pathlib import Path
 import shutil
@@ -16,9 +17,9 @@ import webbrowser
 ROOT = Path(__file__).resolve().parent
 
 
-def start(command, directory):
+def start(command, directory, env=None):
     return subprocess.Popen(
-        command, cwd=directory, start_new_session=(os.name == 'posix')
+        command, cwd=directory, env=env, start_new_session=(os.name == 'posix')
     )
 
 
@@ -64,13 +65,28 @@ def interrupt(_signum, _frame):
     raise KeyboardInterrupt
 
 
-def main():
+def main(lan_addresses=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--port', type=int, default=8000, help='پورت Django؛ پیش‌فرض 8000')
     parser.add_argument('--no-browser', action='store_true', help='مرورگر باز نشود')
+    if lan_addresses is not None:
+        parser.add_argument('--ip', help='IP شبکهٔ کامپیوتر؛ برای انتخاب دستی کارت شبکه')
     args = parser.parse_args()
     if not 1 <= args.port <= 65535:
         parser.error('پورت باید بین 1 و 65535 باشد.')
+    if lan_addresses is not None:
+        if args.ip:
+            try:
+                address = ipaddress.IPv4Address(args.ip)
+                if (address.is_loopback or address.is_unspecified or address.is_multicast
+                        or address.is_reserved or address.is_link_local):
+                    raise ValueError
+            except ValueError:
+                parser.error('--ip باید یک IPv4 معتبر از شبکهٔ کامپیوتر باشد.')
+            lan_addresses = [str(address)]
+        if not lan_addresses:
+            parser.error('IP شبکه پیدا نشد؛ به وای‌فای وصل شوید یا --ip را مشخص کنید.')
+    bind_host = '0.0.0.0' if lan_addresses is not None else '127.0.0.1'
 
     processes = []
     signal.signal(signal.SIGTERM, interrupt)
@@ -84,7 +100,7 @@ def main():
         with socket.socket() as port_check:
             port_check.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
             try:
-                port_check.bind(('127.0.0.1', args.port))
+                port_check.bind((bind_host, args.port))
             except OSError as error:
                 raise RuntimeError(f'پورت {args.port} قابل استفاده نیست؛ --port را تغییر دهید.') from error
 
@@ -96,7 +112,15 @@ def main():
                 return response.status == 200
 
         print('۱. اجرای بک‌اند Django…', flush=True)
-        backend = start([str(python), 'manage.py', 'runserver', f'127.0.0.1:{args.port}'], ROOT / 'backend')
+        backend_env = None
+        if lan_addresses is not None:
+            backend_env = os.environ.copy()
+            backend_env['DJANGO_DEBUG'] = 'true'
+            backend_env['DJANGO_ALLOWED_HOSTS'] = ','.join(['localhost', '127.0.0.1', '[::1]', *lan_addresses])
+        backend = start(
+            [str(python), 'manage.py', 'runserver', f'{bind_host}:{args.port}'],
+            ROOT / 'backend', env=backend_env,
+        )
         processes.append(backend)
         wait_until(backend, backend_ready, 'Django')
 
@@ -115,6 +139,11 @@ def main():
             raise RuntimeError('Django هنگام آماده‌سازی فرانت‌اند متوقف شد.')
 
         print(f'پروژه آماده است: {url}\nبرای توقف هر دو بخش Ctrl+C را بزنید.', flush=True)
+        if lan_addresses is not None:
+            print('گوشی و کامپیوتر را به یک وای‌فای وصل کنید و یکی از نشانی‌های زیر را در مرورگر گوشی باز کنید:', flush=True)
+            for address in lan_addresses:
+                print(f'  http://{address}:{args.port}/', flush=True)
+            print('اگر صفحه باز نشد، دسترسی Python را در فایروال مجاز کنید و جداسازی دستگاه‌ها (AP Isolation / Guest Wi-Fi) را بررسی کنید.\nاین اجرا مخصوص توسعه در شبکهٔ محلی است؛ به Port Forwarding مودم نیاز ندارد.', flush=True)
         if not args.no_browser and not webbrowser.open(url, new=2):
             print('مرورگر خودکار باز نشد؛ نشانی بالا را در مرورگر باز کنید.', flush=True)
 
