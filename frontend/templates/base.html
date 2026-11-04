@@ -7,8 +7,8 @@
     <title>{% block title %}درب و پنجره پارسیان | UPVC و آلومینیوم{% endblock %}</title>
     <meta name="description" content="{% block meta_description %}درب و پنجره پارسیان؛ ساخت و نصب درب و پنجره UPVC و آلومینیومی.{% endblock %}">
     <link rel="preload" href="{% static 'fonts/vazirmatn/Vazirmatn-Variable.woff2' %}" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="{% static 'css/app.css' %}?v=20261105-brands">
-    <script type="module" src="{% static 'js/app.js' %}?v=20261105-brands"></script>
+    <link rel="stylesheet" href="{% static 'css/app.css' %}?v=20261105-faq">
+    <script type="module" src="{% static 'js/app.js' %}?v=20261105-faq"></script>
   </head>
   <body class="bg-surface text-ink antialiased">
     <a class="sr-only rounded-md bg-surface px-4 py-3 text-ink focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-50 focus:outline-2 focus:outline-primary" href="#main-content">رفتن به محتوای اصلی</a>
@@ -21,6 +21,7 @@
         {% include 'includes/portfolio.html' %}
         {% include 'includes/about.html' %}
         {% include 'includes/brands.html' %}
+        {% include 'includes/faq.html' %}
       {% endblock %}
     </main>
   </body>

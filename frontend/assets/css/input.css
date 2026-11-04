@@ -65,6 +65,25 @@
 }
 
 @layer components {
+  [data-faq-ready] [data-faq-panel] {
+    grid-template-rows: 0fr;
+    opacity: 0;
+    visibility: hidden;
+    transition: grid-template-rows 360ms ease-out, opacity 300ms ease-out, visibility 360ms;
+  }
+
+  [data-faq-ready] [data-open="true"] [data-faq-panel] {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-faq-ready] [data-faq-panel] {
+      transition: none;
+    }
+  }
+
   @media (prefers-reduced-motion: no-preference) {
     [data-portfolio-reveal] {
       transition: opacity 550ms ease-out, translate 550ms ease-out;
