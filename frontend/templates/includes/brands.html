@@ -1,0 +1,16 @@
+<section id="materials-brands" class="bg-surface-soft py-12 sm:py-14 lg:py-16" aria-labelledby="brands-heading" data-brands-section>
+  <div class="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-16 xl:px-24">
+    <div class="text-center">
+      <span class="mx-auto mb-4 block h-0.5 w-10 bg-primary" aria-hidden="true"></span>
+      <h2 id="brands-heading" class="text-2xl font-bold leading-relaxed text-navy lg:text-[30px] xl:text-[32px]">متریال و برندهای مورد استفاده</h2>
+      <p class="mt-3 text-sm font-light leading-7 text-muted sm:text-base">استفاده از متریال باکیفیت و برندهای معتبر در تولید درب و پنجره</p>
+    </div>
+    <p id="brands-scroll-hint" class="sr-only md:hidden">برای مشاهده برندها بکشید یا از کلیدهای پیکان استفاده کنید.</p>
+    <ul class="mt-8 grid auto-cols-[calc((100%_-_1rem)/2)] grid-flow-col snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-smooth py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary motion-reduce:scroll-auto md:mt-10 md:grid-flow-row md:grid-cols-4 md:overflow-visible" tabindex="0" aria-label="برندهای متریال و یراق‌آلات" aria-describedby="brands-scroll-hint" data-carousel-track>
+      {% include 'includes/brand-item.html' with name='آلومتال' category='پروفیل آلومینیوم' only %}
+      {% include 'includes/brand-item.html' with name='هافمن' category='پروفیل UPVC' image='hofmann-logo' width=175 height=45 only %}
+      {% include 'includes/brand-item.html' with name='شفر' category='پروفیل UPVC' image='sheffer-logo' width=1080 height=500 only %}
+      {% include 'includes/brand-item.html' with name='اندو' code='ENDOW' category='یراق‌آلات' image='endow-logo' width=1024 height=239 only %}
+    </ul>
+  </div>
+</section>

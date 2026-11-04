@@ -1,0 +1,12 @@
+{% load static %}
+<li class="group min-w-0 snap-start px-2 text-center" data-carousel-item>
+  <div class="flex h-20 items-center justify-center motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:-translate-y-1 sm:h-24">
+    {% if image %}
+      <img class="max-h-full w-full max-w-36 object-contain sm:max-w-44{% if code %} bg-navy px-3 py-2{% endif %}" src="{% static 'images/brands/' %}{{ image }}.webp" width="{{ width }}" height="{{ height }}" alt="نشان تجاری {{ name }}{% if code %} ({{ code }}){% endif %}" loading="lazy" decoding="async">
+    {% else %}
+      <span class="text-2xl font-bold text-navy sm:text-3xl">{{ name }}</span>
+    {% endif %}
+  </div>
+  <h3 class="mt-5 text-base font-bold leading-7 text-navy">{% if code %}<bdi lang="en">{{ code }}</bdi> <span class="text-sm">({{ name }})</span>{% else %}{{ name }}{% endif %}</h3>
+  <p class="mt-1 text-xs font-light leading-6 text-muted sm:text-sm">{{ category }}</p>
+</li>
