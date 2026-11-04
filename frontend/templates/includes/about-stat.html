@@ -1,0 +1,7 @@
+<div class="relative flex min-w-0 flex-col px-1 not-first:before:absolute not-first:before:start-0 not-first:before:top-3 not-first:before:h-8 not-first:before:w-px not-first:before:bg-navy/10">
+  <dt class="order-2 mt-1 text-[10px] font-light leading-5 text-ink sm:text-xs md:max-lg:text-[10px]">{{ label }}</dt>
+  <dd class="order-1 text-2xl font-bold leading-8 text-navy lg:text-[28px] lg:leading-9">
+    <span class="sr-only"><bdi dir="ltr">+{{ value }}</bdi></span>
+    <bdi class="inline-block min-w-[4ch] tabular-nums" dir="ltr" aria-hidden="true">+<span data-counter-target="{{ value }}">{{ value }}</span></bdi>
+  </dd>
+</div>
