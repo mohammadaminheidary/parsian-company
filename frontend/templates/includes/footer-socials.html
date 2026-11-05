@@ -1,0 +1,5 @@
+{# Replace unavailable destinations only after the owner supplies verified profiles. #}
+<ul class="flex flex-wrap items-center gap-2" aria-label="شبکه‌های اجتماعی پارسیان">
+  <li><span class="inline-flex min-h-11 items-center gap-2 px-2" role="link" aria-disabled="true" title="اینستاگرام؛ به‌زودی">{% include 'includes/footer-icon.html' with name='instagram' only %}<span class="{% if compact %}sr-only{% else %}text-xs{% endif %}">اینستاگرام؛ به‌زودی</span></span></li>
+  <li><span class="inline-flex min-h-11 items-center gap-2 px-2 text-accent" role="link" aria-disabled="true" title="واتساپ؛ به‌زودی">{% include 'includes/footer-icon.html' with name='whatsapp' only %}<span class="{% if compact %}sr-only{% else %}text-xs{% endif %}">واتساپ؛ به‌زودی</span></span></li>
+</ul>
