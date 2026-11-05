@@ -1,12 +1,12 @@
 {% load static %}
 <section id="why-parsian" class="relative isolate bg-navy bg-cover bg-position-[30%_center] text-on-dark sm:bg-center" style="background-image: url('{% static 'images/why-choose-parsian-bg.jpg' %}')" aria-labelledby="why-parsian-heading" data-why-choose>
   <div class="pointer-events-none absolute inset-0 -z-10 bg-linear-to-l from-navy/95 via-navy/80 to-navy/45" aria-hidden="true"></div>
-  <div class="mx-auto max-w-[1600px] px-5 py-10 sm:px-8 sm:py-12 lg:px-16 xl:px-24">
+  <div class="mx-auto max-w-[1600px] px-5 py-7 sm:px-8 sm:py-12 lg:px-16 lg:py-8 xl:px-24">
     <div class="text-start motion-safe:transition-[opacity,translate] motion-safe:duration-600 motion-safe:ease-out motion-safe:data-[reveal=pending]:translate-y-4 motion-safe:data-[reveal=pending]:opacity-0" data-why-reveal>
       <p class="mb-2 text-xs font-light leading-6 text-on-dark/78 sm:text-sm">اعتماد شما سرمایه ماست</p>
-      <h2 id="why-parsian-heading" class="text-2xl font-bold leading-relaxed sm:text-3xl">چرا پارسیان را انتخاب کنیم؟</h2>
+      <h2 id="why-parsian-heading" class="text-2xl font-bold leading-relaxed sm:text-3xl lg:text-2xl">چرا پارسیان را انتخاب کنیم؟</h2>
     </div>
-    <ul class="mt-10 grid grid-cols-2 gap-y-9 sm:mt-12 sm:grid-cols-3 lg:grid-cols-6 lg:gap-y-0" aria-label="دلایل انتخاب پارسیان">
+    <ul class="mt-6 grid grid-cols-3 gap-y-5 sm:mt-12 sm:gap-y-9 lg:mt-7 lg:grid-cols-6 lg:gap-y-0" aria-label="دلایل انتخاب پارسیان">
       {% include 'includes/why-choose-item.html' with key='quality' line1='کیفیت ساخت' line2='و مونتاژ دقیق' description='دقت در برش و مونتاژ، برای عملکرد روان و دوام درب و پنجره.' only %}
       {% include 'includes/why-choose-item.html' with key='materials' line1='استفاده از' line2='متریال با کیفیت' description='انتخاب پروفیل، شیشه و یراق‌آلات با توجه به کیفیت و دوام.' only %}
       {% include 'includes/why-choose-item.html' with key='sizing' line1='تولید متناسب' line2='با ابعاد پروژه' description='اندازه‌گیری دقیق و ساخت متناسب با ابعاد و نیاز پروژه شما.' only %}
@@ -14,5 +14,6 @@
       {% include 'includes/why-choose-item.html' with key='consultation' line1='مشاوره پیش از' line2='ثبت سفارش' description='راهنمایی برای انتخاب مدل و متریال متناسب با نیاز و بودجه شما.' only %}
       {% include 'includes/why-choose-item.html' with key='pricing' line1='قیمت‌گذاری' line2='شفاف و منصفانه' description='ارائه جزئیات هزینه ساخت و نصب پیش از نهایی شدن سفارش.' only %}
     </ul>
+    <p class="mt-5 text-center text-xs leading-6 text-gray-300 sm:mt-7 sm:text-sm lg:mt-5">برای جزئیات بیشتر روی آیکون‌ها کلیک کنید</p>
   </div>
 </section>

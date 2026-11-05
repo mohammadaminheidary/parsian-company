@@ -1,8 +1,8 @@
-<li class="group/reason relative min-w-0 border-s border-on-dark/15 max-sm:nth-[2n+1]:border-transparent sm:max-lg:nth-[3n+1]:border-transparent lg:first:border-transparent motion-safe:transition-[opacity,translate] motion-safe:duration-600 motion-safe:ease-out motion-safe:delay-(--reveal-delay) motion-safe:data-[reveal=pending]:translate-y-4 motion-safe:data-[reveal=pending]:opacity-0" data-why-reveal data-reason>
+<li class="group/reason relative min-w-0 md:border-s md:border-on-dark/15 md:max-lg:nth-[3n+1]:border-transparent lg:first:border-transparent motion-safe:transition-[opacity,translate] motion-safe:duration-600 motion-safe:ease-out motion-safe:delay-(--reveal-delay) motion-safe:data-[reveal=pending]:translate-y-4 motion-safe:data-[reveal=pending]:opacity-0" data-why-reveal data-reason>
   <h3>
-    <button type="button" class="flex w-full cursor-pointer flex-col items-center gap-3 rounded-sm px-2 py-1 text-center text-sm font-bold leading-7 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:text-base" aria-expanded="false" aria-controls="why-{{ key }}-description" aria-describedby="why-{{ key }}-description" data-reason-trigger>
-      <span class="flex size-14 items-center justify-center rounded-full bg-primary/15 text-on-dark transition-colors duration-200 group-data-[popup=open]/reason:bg-primary/30 group-data-[popup=open]/reason:text-accent motion-reduce:transition-none sm:size-16" aria-hidden="true">
-        <svg class="size-8 sm:size-9" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+    <button type="button" class="flex w-full cursor-pointer flex-col items-center gap-3 rounded-sm px-2 py-1 text-center text-[0.8rem] font-bold leading-7 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:text-base lg:gap-2 lg:leading-6" aria-expanded="false" aria-controls="why-{{ key }}-description" aria-describedby="why-{{ key }}-description" data-reason-trigger>
+      <span class="flex size-14 items-center justify-center rounded-full bg-primary/15 text-on-dark transition-colors duration-200 group-data-[popup=open]/reason:bg-primary/30 group-data-[popup=open]/reason:text-accent motion-reduce:transition-none sm:size-16 lg:size-14" aria-hidden="true">
+        <svg class="size-8 sm:size-9 lg:size-8" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
           {% if key == 'quality' %}
             <path d="m4 11 5-6h14l5 6-12 17L4 11Zm0 0h24M9 5l3 6 4-6 4 6 3-6M12 11l4 17 4-17"/>
           {% elif key == 'materials' %}
@@ -22,6 +22,6 @@
     </button>
   </h3>
   <div id="why-{{ key }}-description" role="tooltip" aria-hidden="true" class="pointer-events-none invisible absolute -inset-x-2 bottom-full z-20 translate-y-2 pb-3 opacity-0 transition-[opacity,translate,visibility] duration-200 group-data-[popup=open]/reason:pointer-events-auto group-data-[popup=open]/reason:visible group-data-[popup=open]/reason:translate-y-0 group-data-[popup=open]/reason:opacity-100 motion-reduce:translate-none motion-reduce:transition-none after:absolute after:bottom-2 after:left-1/2 after:size-2 after:-translate-x-1/2 after:rotate-45 after:bg-navy" data-reason-popup>
-    <p class="rounded-lg border border-accent/25 bg-navy px-3 py-3 text-center text-[13px] font-light leading-6 text-on-dark/90">{{ description }}</p>
+    <p class="rounded-lg border border-accent/25 bg-navy px-3 py-3 text-center text-[0.8125rem] font-light leading-6 text-on-dark/90">{{ description }}</p>
   </div>
 </li>
