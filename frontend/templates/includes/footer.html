@@ -13,66 +13,16 @@
         </div>
       </div>
 
-      <section id="footer-contact" class="group/accordion min-w-0 scroll-mt-24 border-b border-on-dark/12 md:order-2 md:border-0 md:border-e md:pe-5 lg:pe-8" data-footer-item>
-        {% include 'includes/footer-heading.html' with key='contact' title='اطلاعات تماس' only %}
-        <div id="footer-panel-contact" class="grid grid-rows-[1fr] transition-[grid-template-rows,opacity,visibility] duration-350 ease-out motion-reduce:transition-none max-md:group-data-[footer-ready]/footer:group-data-[open=false]/accordion:invisible max-md:group-data-[footer-ready]/footer:group-data-[open=false]/accordion:grid-rows-[0fr] max-md:group-data-[footer-ready]/footer:group-data-[open=false]/accordion:opacity-0" data-footer-panel>
-          <div class="min-h-0 overflow-hidden">
-            <address class="pt-1 pb-5 text-xs font-light leading-6 not-italic md:pb-0">
-              <ul class="space-y-2">
-                <li class="flex items-start gap-2">{% include 'includes/footer-icon.html' with name='phone' class='mt-1 text-accent' only %}<span>تلفن همراه: به‌زودی</span></li>
-                <li class="flex items-start gap-2">{% include 'includes/footer-icon.html' with name='phone' class='mt-1 text-accent' only %}<span>تلفن کارگاه: به‌زودی</span></li>
-                <li class="flex items-start gap-2">{% include 'includes/footer-icon.html' with name='location' class='mt-1 text-accent' only %}<span>نشانی کامل کارگاه: به‌زودی اعلام می‌شود</span></li>
-                <li class="flex items-start gap-2">{% include 'includes/footer-icon.html' with name='clock' class='mt-1 text-accent' only %}<span>ساعات کاری: به‌زودی</span></li>
-                <li class="flex items-start gap-2 text-accent">{% include 'includes/footer-icon.html' with name='location' class='mt-1' only %}<span role="link" aria-disabled="true" title="موقعیت کارگاه هنوز اعلام نشده است">مشاهده موقعیت در نقشه<span class="sr-only">؛ به‌زودی</span></span></li>
-              </ul>
-              <p class="mt-2 text-[10px] leading-5 text-[#C8D7E6]/75">اطلاعات تماس هنوز تأیید نشده است.</p>
-              <div class="mt-1 hidden md:block">{% include 'includes/footer-socials.html' with compact=True only %}</div>
-            </address>
-          </div>
+      <div class="min-w-0 md:contents" data-footer-sections>
+        {% include 'includes/footer-sections.html' with sizing=False only %}
+        {% comment %}
+          Mobile reserves all menu headings plus the larger of the full map and
+          tallest panel. Sizing copies share content without IDs or behavior hooks.
+        {% endcomment %}
+        <div class="invisible pointer-events-none min-w-0 md:hidden" aria-hidden="true" inert data-footer-sizer>
+          {% include 'includes/footer-sections.html' with sizing=True only %}
         </div>
-      </section>
-
-      <section class="group/accordion min-w-0 border-b border-on-dark/12 md:order-3 md:border-0 md:border-e md:pe-5 lg:pe-8" data-footer-item>
-        {% include 'includes/footer-heading.html' with key='links' title='دسترسی سریع' only %}
-        <div id="footer-panel-links" class="grid grid-rows-[1fr] transition-[grid-template-rows,opacity,visibility] duration-350 ease-out motion-reduce:transition-none max-md:group-data-[footer-ready]/footer:group-data-[open=false]/accordion:invisible max-md:group-data-[footer-ready]/footer:group-data-[open=false]/accordion:grid-rows-[0fr] max-md:group-data-[footer-ready]/footer:group-data-[open=false]/accordion:opacity-0" data-footer-panel>
-          <div class="min-h-0 overflow-hidden">
-            <nav class="pt-1 pb-5 text-xs font-light md:pb-0" aria-label="دسترسی سریع پاورقی">
-              <ul>
-                {% url 'home' as home_url %}
-                {% include 'includes/footer-link.html' with href=home_url label='صفحه اصلی' only %}
-                {% include 'includes/footer-link.html' with href='#products' label='محصولات' only %}
-                {% include 'includes/footer-link.html' with href='#products' label='خدمات' only %}
-                {% include 'includes/footer-link.html' with href='#portfolio' label='نمونه‌کارها' only %}
-                {% include 'includes/footer-link.html' with href='#about' label='درباره ما' only %}
-                {% include 'includes/footer-link.html' with href='#footer-contact' label='تماس با ما' only %}
-                {% include 'includes/footer-link.html' with label='استعلام قیمت' only %}
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </section>
-
-      <section class="group/accordion border-b border-on-dark/12 md:hidden" data-footer-item>
-        {% include 'includes/footer-heading.html' with key='socials' title='شبکه‌های اجتماعی' only %}
-        <div id="footer-panel-socials" class="grid grid-rows-[1fr] transition-[grid-template-rows,opacity,visibility] duration-350 ease-out motion-reduce:transition-none max-md:group-data-[footer-ready]/footer:group-data-[open=false]/accordion:invisible max-md:group-data-[footer-ready]/footer:group-data-[open=false]/accordion:grid-rows-[0fr] max-md:group-data-[footer-ready]/footer:group-data-[open=false]/accordion:opacity-0" data-footer-panel>
-          <div class="min-h-0 overflow-hidden"><div class="pb-4">{% include 'includes/footer-socials.html' only %}</div></div>
-        </div>
-      </section>
-
-      <section class="group/accordion min-w-0 border-b border-on-dark/12 md:order-1 md:border-0" data-footer-item>
-        <div class="md:hidden">{% include 'includes/footer-heading.html' with key='location' title='نشانی کارگاه' only %}</div>
-        <div id="footer-panel-location" class="grid grid-rows-[1fr] transition-[grid-template-rows,opacity,visibility] duration-350 ease-out motion-reduce:transition-none max-md:group-data-[footer-ready]/footer:group-data-[open=false]/accordion:invisible max-md:group-data-[footer-ready]/footer:group-data-[open=false]/accordion:grid-rows-[0fr] max-md:group-data-[footer-ready]/footer:group-data-[open=false]/accordion:opacity-0" data-footer-panel>
-          <div class="min-h-0 overflow-hidden">
-            <figure class="pb-5 md:pb-0">
-              <div class="relative overflow-hidden rounded-md">
-                <img class="aspect-[6/5] w-full object-cover" src="{% static 'images/portfolio/karaj-residence-400.webp' %}" width="400" height="300" alt="نمای ساختمان مدرن با پنجره‌های بزرگ؛ تصویر معماری نمونه" loading="lazy" decoding="async">
-                <span class="absolute inset-x-3 bottom-3 flex min-h-10 items-center justify-center gap-2 rounded-sm bg-navy/90 px-2 py-2 text-center text-[11px] font-bold leading-5 text-on-dark" role="link" aria-disabled="true" title="نشانی کارگاه هنوز اعلام نشده است">{% include 'includes/footer-icon.html' with name='location' only %}مشاهده نشانی کارگاه</span>
-              </div>
-              <figcaption class="mt-2 text-[10px] leading-5 text-[#C8D7E6]/75">تصویر معماری نمونه؛ نشانی کارگاه به‌زودی</figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
+      </div>
     </div>
 
     <div class="relative mt-5 flex min-h-26 flex-col items-center justify-center gap-2 border-t border-on-dark/12 py-5 ps-12 pe-0 text-center md:mt-7 md:min-h-24 md:px-12">

@@ -65,6 +65,88 @@
 }
 
 @layer components {
+  [data-footer-sizer] {
+    display: none;
+  }
+
+  @media (width < 48rem) {
+    [data-footer-ready] [data-footer-sections] {
+      @apply isolate grid grid-cols-1;
+      /* The collapsed map starts after all three measured heading rows. */
+      grid-template-rows: [contact] auto [links] auto [socials] auto [map] auto [end];
+    }
+
+    [data-footer-ready] [data-footer-sizer] {
+      grid-area: 1 / 1 / -1 / 2;
+      min-width: 0;
+    }
+
+    [data-footer-ready] [data-footer-menus],
+    [data-footer-ready] [data-footer-item] {
+      display: contents;
+    }
+
+    [data-footer-ready] [data-footer-heading] {
+      @apply bg-navy;
+      grid-column: 1;
+    }
+
+    [data-footer-ready] [data-footer-heading="contact"] {
+      grid-row: contact;
+    }
+
+    [data-footer-ready] [data-footer-heading="links"] {
+      grid-row: links;
+    }
+
+    [data-footer-ready] [data-footer-heading="socials"] {
+      grid-row: socials;
+    }
+
+    [data-footer-ready] [data-footer-sizer] {
+      @apply grid grid-cols-1;
+      grid-template-rows: subgrid;
+    }
+
+    [data-footer-ready] [data-footer-size-panel],
+    [data-footer-ready] [data-footer-size-location] {
+      /* Reserve the larger of the full map and the tallest answer. */
+      grid-area: map / 1 / end / 2;
+    }
+
+    [data-footer-ready] [data-footer-panel] {
+      /* Only menu content overlays the map; the heading rows stay above it. */
+      @apply pointer-events-none relative z-10 grid self-start rounded-md bg-navy/85 text-start wrap-anywhere;
+      grid-area: map / 1 / end / 2;
+      grid-template-rows: 0fr;
+      opacity: 0;
+      visibility: hidden;
+      transition: grid-template-rows 350ms ease-out, opacity 300ms ease-out, visibility 350ms;
+    }
+
+    [data-footer-ready] [data-open="true"] > [data-footer-panel] {
+      pointer-events: auto;
+      grid-template-rows: 1fr;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    [data-footer-ready] [data-footer-location] {
+      /* Never change the map's grid position or its intrinsic image sizing. */
+      @apply relative min-h-0 self-start;
+      grid-area: map / 1 / end / 2;
+    }
+
+    [data-footer-ready] [data-footer-location] > h3,
+    [data-footer-ready] [data-footer-size-location] > h3 {
+      @apply sr-only;
+    }
+
+    [data-footer-ready]:has([data-footer-item][data-open="true"]) [data-footer-map] {
+      opacity: 0.4;
+    }
+  }
+
   [data-faq-ready] [data-faq-panel] {
     grid-template-rows: 0fr;
     opacity: 0;
@@ -79,6 +161,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
+    [data-footer-ready] [data-footer-panel],
     [data-faq-ready] [data-faq-panel] {
       transition: none;
     }
