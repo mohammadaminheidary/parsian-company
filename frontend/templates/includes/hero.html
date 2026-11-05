@@ -15,13 +15,13 @@
     loading="eager"
   />
   <div
-    class="absolute inset-0 -z-10 bg-linear-to-l from-navy/95 via-navy/75 via-55% to-navy/45 md:from-navy md:via-navy/60 md:via-50% md:to-navy/25"
+    class="absolute inset-0 -z-10 bg-navy/80 backdrop-blur-[0.7px] md:bg-transparent md:bg-linear-to-l md:from-navy md:via-navy/60 md:via-50% md:to-navy/25 md:backdrop-blur-[1px]"
     aria-hidden="true"
   ></div>
   <div
     class="mx-auto w-full max-w-[1920px] px-5 py-14 sm:px-[5.5%] md:py-12 lg:py-16"
   >
-    <div class="text-start md:w-3/5">
+    <div class="text-center md:text-start md:w-3/5">
       <p
         class="mb-3 text-sm font-light leading-relaxed text-accent md:mb-4 md:text-[clamp(0.75rem,1.3vw,1.5rem)] lg:mb-5 motion-safe:animate-hero-enter motion-safe:[animation-delay:100ms]"
       >
@@ -31,27 +31,78 @@
         class="text-[clamp(2rem,4.4vw,5.25rem)] font-bold leading-tight motion-safe:animate-hero-enter motion-safe:[animation-delay:200ms]"
         id="hero-heading"
       >
-        گروه صنعتی پارسیان
+        درب و پنجره پارسیان
       </h1>
-      <p
-        class="mt-4 max-w-xl text-base font-light leading-relaxed md:mt-3 md:max-w-none md:text-[clamp(0.875rem,1.6vw,1.875rem)] lg:mt-5 motion-safe:animate-hero-enter motion-safe:[animation-delay:300ms]"
+      <h2
+        class="mt-4 max-w-xl text-base font-light leading-relaxed md:mt-3 md:max-w-none md:text-[clamp(0.5rem,1.6vw,1.5rem)] lg:mt-5 motion-safe:animate-hero-enter motion-safe:[animation-delay:300ms]"
       >
         طراحی، ساخت و نصب درب و پنجره <bdi lang="en">UPVC</bdi> و آلومینیومی
-      </p>
+      </h2>
       <div
         class="mt-8 flex flex-col gap-3 min-[400px]:flex-row md:mt-[6vw] md:gap-[1.7vw] motion-safe:animate-hero-enter motion-safe:[animation-delay:400ms]"
       >
         <a
-          class="inline-flex cursor-not-allowed min-h-11 items-center justify-center whitespace-nowrap rounded-md bg-primary-strong px-5 py-3 text-sm font-bold transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-on-dark motion-reduce:transition-none min-[400px]:flex-1 md:min-h-[clamp(2.75rem,3.5vw,4rem)] md:w-[17.5vw] md:max-w-80 md:flex-none md:px-3 md:py-2 md:text-[clamp(0.875rem,1.1vw,1.25rem)]"
+          class="inline-flex cursor-pointer min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-[20px] bg-[#087CDE]/80 backdrop-blur-xl px-5 py-3 text-sm font-bold transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-on-dark motion-reduce:transition-none min-[400px]:flex-1 md:min-h-[clamp(2.75rem,3.5vw,4rem)] md:w-[17.5vw] md:min-w-max md:max-w-80 md:flex-none md:px-3 md:py-2 md:text-[clamp(0.875rem,1.1vw,1.25rem)]"
           role="link" aria-disabled="true" title="به‌زودی"
-          >استعلام قیمت رایگان<span class="sr-only"> (به‌زودی)</span></a
         >
+          <svg class="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z"/>
+            <path d="M14 2v6h6M8 13h8M8 17h5"/>
+          </svg>
+          <span>استعلام قیمت رایگان<span class="sr-only"> (به‌زودی)</span></span>
+        </a>
         <a
-          class="inline-flex cursor-not-allowed min-h-11 items-center justify-center whitespace-nowrap rounded-md bg-primary-strong px-5 py-3 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-on-dark motion-reduce:transition-none min-[400px]:flex-1 md:min-h-[clamp(2.75rem,3.5vw,4rem)] md:w-[17.5vw] md:max-w-80 md:flex-none md:px-3 md:py-2 md:text-[clamp(0.875rem,1.1vw,1.25rem)]"
+          class="inline-flex cursor-pointer min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-[20px] bg-[#087CDE]/80 backdrop-blur-xl px-5 py-3 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-on-dark motion-reduce:transition-none min-[400px]:flex-1 md:min-h-[clamp(2.75rem,3.5vw,4rem)] md:w-[17.5vw] md:min-w-max md:max-w-80 md:flex-none md:px-3 md:py-2 md:text-[clamp(0.875rem,1.1vw,1.25rem)]"
           role="link" aria-disabled="true" title="به‌زودی"
-          >مشاهده نمونه‌کارها<span class="sr-only"> (به‌زودی)</span></a
         >
+          <svg class="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <path d="m21 15-5-5L5 21"/>
+          </svg>
+          <span>مشاهده نمونه‌کارها<span class="sr-only"> (به‌زودی)</span></span>
+        </a>
       </div>
+      <ul
+        class="mt-8 grid w-fit mx-auto md:mx-0 max-w-full grid-cols-3 gap-x-12 text-center text-xs font-medium leading-relaxed sm:mt-10 sm:grid-cols-[repeat(3,max-content)] sm:gap-x-25  sm:text-start md:mt-[3vw] md:gap-x-10 lg:gap-x-30 lg:text-sm xl:text-base motion-safe:animate-hero-enter motion-safe:[animation-delay:500ms]"
+        role="list"
+        aria-label="مزایای پارسیان"
+      >
+        <li class="flex min-w-0 flex-col items-center gap-2 sm:flex-row">
+          <svg class="size-6 shrink-0 text-accent lg:size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M3 14v-3a9 9 0 0 1 18 0v3M21 16v2a3 3 0 0 1-3 3h-4"/>
+            <rect x="3" y="11" width="4" height="7" rx="2"/>
+            <rect x="17" y="11" width="4" height="7" rx="2"/>
+          </svg>
+          <p>مشاوره رایگان</p>
+        </li>
+        <li class="flex min-w-0 flex-col items-center gap-2 sm:flex-row">
+          <svg class="size-6 shrink-0 text-accent lg:size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="m14.5 6.5 3 3 4-4a6 6 0 0 1-7.8 7.8l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.8-7.8l-4 4Z"/>
+          </svg>
+          <div class="flex flex-col">
+             <p>نصب تخصصی</p>
+             <p>توسط تیم مجرب</p>
+          </div>
+        </li>
+        <li class="flex min-w-0 flex-col items-center gap-2 sm:flex-row">
+          <svg class="size-6 shrink-0 text-accent lg:size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="8" r="6"/>
+            <path d="m8.2 12.6-1.2 9.4 5-3 5 3-1.2-9.4"/>
+          </svg>
+          <p>۱۵ سال تجربه کار</p>
+        </li>
+      </ul>
     </div>
   </div>
+  <a
+    class="absolute bottom-1 left-1/2 inline-flex size-11 -translate-x-1/2 items-center justify-center rounded-full bg-navy/60 text-on-dark hover:bg-navy/85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-on-dark motion-safe:transition-colors"
+    href="#products"
+    aria-label="رفتن به بخش محصولات و خدمات"
+  >
+    <picture aria-hidden="true">
+      <source media="(prefers-reduced-motion: no-preference)" srcset="{% static 'images/hero/scroll-cue.gif' %}" type="image/gif">
+      <img class="size-8" src="{% static 'images/hero/scroll-cue.svg' %}" width="32" height="32" alt="">
+    </picture>
+  </a>
 </section>
