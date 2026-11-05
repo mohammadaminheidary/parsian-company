@@ -2,7 +2,7 @@ import { initializeHeader } from './header.js?v=20261105-smooth-navbar';
 import { revealProducts } from './products.js?v=20261106-row-reveal';
 import { initializeCarousel } from './carousel.js?v=20261105-brands';
 import { initializeWhyChoose } from './why-choose.js';
-import { initializePortfolio } from './portfolio.js';
+import { initializePortfolio } from './portfolio.js?v=20261105-portfolio-scale';
 import { initializeCounters } from './counters.js';
 import { initializeFaq } from './faq.js';
 import { initializeFooter } from './footer.js';

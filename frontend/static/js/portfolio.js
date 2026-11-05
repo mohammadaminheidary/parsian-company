@@ -2,9 +2,10 @@ export function initializePortfolio(section) {
   const track = section.querySelector('[data-portfolio-track]');
   const items = [...section.querySelectorAll('[data-portfolio-item]')];
   const filters = [...section.querySelectorAll('[data-portfolio-filter]')];
-  const viewAll = section.querySelector('[data-portfolio-all]');
+  const viewAll = [...section.querySelectorAll('[data-portfolio-all]')];
+  const more = section.querySelector('[data-portfolio-more]');
   const status = section.querySelector('[data-portfolio-status]');
-  if (!track || !items.length || !filters.length || !viewAll || !status) return;
+  if (!track || !items.length || !filters.length || !viewAll.length || !status) return;
 
   const mobile = matchMedia('(max-width: 767px)');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
@@ -18,6 +19,7 @@ export function initializePortfolio(section) {
     });
     // Reset to the first project after filtering, including negative RTL offsets.
     track.scrollTo({ left: 0, behavior: 'instant' });
+    updateActiveCard();
     const count = items.filter((item) => !item.hidden).length.toLocaleString('fa-IR');
     const label = filters.find((button) => button.dataset.portfolioFilter === category).textContent.trim();
     status.textContent = `${count} پروژه در دسته «${label}» نمایش داده می‌شود.`;
@@ -27,11 +29,15 @@ export function initializePortfolio(section) {
     button.disabled = false;
     button.addEventListener('click', () => filterProjects(button.dataset.portfolioFilter));
   });
-  viewAll.disabled = false;
-  viewAll.addEventListener('click', () => filterProjects('all'));
+  viewAll.forEach((button) => {
+    button.disabled = false;
+    button.addEventListener('click', () => filterProjects('all'));
+  });
 
   function positions() {
-    const visibleItems = items.filter((item) => !item.hidden);
+    // Include the final action in snapping and keyboard navigation, not project counts.
+    const candidates = mobile.matches && more ? [...items, more] : items;
+    const visibleItems = candidates.filter((item) => !item.hidden);
     const bounds = track.getBoundingClientRect();
     const distances = visibleItems.map((item) => {
       const rect = item.getBoundingClientRect();
@@ -40,6 +46,25 @@ export function initializePortfolio(section) {
     const current = distances.reduce((nearest, distance, index) => Math.abs(distance) < Math.abs(distances[nearest]) ? index : nearest, 0);
     return { visibleItems, distances, current };
   }
+
+  function updateActiveCard() {
+    const { visibleItems, current } = positions();
+    [...items, ...(more ? [more] : [])].forEach((item) => {
+      const card = item.querySelector('[data-portfolio-card]');
+      if (!card) return;
+      if (mobile.matches) card.dataset.active = String(item === visibleItems[current]);
+      else delete card.dataset.active;
+    });
+  }
+
+  let activeFrame = 0;
+  track.addEventListener('scroll', () => {
+    if (!mobile.matches || activeFrame) return;
+    activeFrame = requestAnimationFrame(() => {
+      activeFrame = 0;
+      updateActiveCard();
+    });
+  }, { passive: true });
 
   // Correct browser rounding only after native momentum and pointer input stop.
   let settleTimer;
@@ -95,8 +120,10 @@ export function initializePortfolio(section) {
       track.removeAttribute('aria-describedby');
       track.scrollTo({ left: 0, behavior: 'instant' });
     }
+    updateActiveCard();
   }
   mobile.addEventListener('change', updateLayout);
+  window.addEventListener('resize', updateActiveCard);
   updateLayout();
 
   // Progressive enhancement: content stays visible without JS or visibility support.
