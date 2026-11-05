@@ -14,12 +14,18 @@
           <svg class="size-4 shrink-0" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m6-6-6 6 6 6"/></svg>
         </a>
       </div>
-      <div id="faq-questions" class="scroll-mt-28 border-t border-on-dark/18 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent" tabindex="-1">
-        {% include 'includes/faq-item.html' with key='materials' question='تفاوت پنجره UPVC و آلومینیومی چیست؟' answer='پنجره UPVC عایق حرارتی مناسبی است و معمولاً هزینه کمتری دارد. آلومینیوم استحکام بیشتری دارد و برای قاب‌های باریک و ابعاد بزرگ مناسب‌تر است؛ برای عایق‌کاری بهتر، نوع ترمال بریک را انتخاب کنید.' only %}
-        {% include 'includes/faq-item.html' with key='thermal-break' question='پنجره آلومینیومی ترمال بریک چه مزایایی دارد؟' answer='لایه عایق میان بخش داخلی و خارجی پروفیل، انتقال گرما و سرما را کاهش می‌دهد. همراه با شیشه مناسب و نصب اصولی، به کاهش اتلاف انرژی و تشکیل بخار روی قاب کمک می‌کند.' only %}
-        {% include 'includes/faq-item.html' with key='pricing' question='قیمت درب و پنجره چگونه محاسبه می‌شود؟' answer='قیمت به ابعاد، نوع پروفیل و شیشه، مدل بازشو، یراق‌آلات و شرایط نصب بستگی دارد. برای برآورد اولیه، ابعاد تقریبی و عکس محل را آماده کنید؛ قیمت نهایی پس از اندازه‌گیری و انتخاب متریال مشخص می‌شود.' only %}
-        {% include 'includes/faq-item.html' with key='custom-size' question='آیا امکان ساخت پنجره با ابعاد سفارشی وجود دارد؟' answer='بله، درب و پنجره متناسب با ابعاد محل و نیاز پروژه ساخته می‌شود. پس از اندازه‌گیری دقیق، ابعاد قابل اجرا و نوع بازشو با توجه به محدودیت‌های فنی پروفیل و شیشه بررسی می‌شود.' only %}
-        {% include 'includes/faq-item.html' with key='installation' question='مدت‌زمان ساخت و نصب چقدر است؟' answer='زمان اجرا به تعداد پنجره‌ها، متریال انتخابی و آماده‌بودن محل نصب بستگی دارد. برنامه ساخت و نصب پس از اندازه‌گیری و تأیید سفارش مشخص می‌شود؛ سفارش‌های خاص ممکن است زمان بیشتری نیاز داشته باشند.' only %}
+      <div id="faq-questions" class="grid grid-cols-1 scroll-mt-28 border-t border-on-dark/18 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent" tabindex="-1">
+        <div class="col-start-1 row-start-1 min-w-0 self-start">
+          {% include 'includes/faq-questions.html' with sizing=False only %}
+        </div>
+        {% comment %}
+          One answer can be open at a time. Stack the sizing answers in one grid
+          cell to reserve only the tallest answer, plus all question rows. Using
+          the same content and typography keeps this responsive without measurements.
+        {% endcomment %}
+        <div class="invisible pointer-events-none col-start-1 row-start-1 grid min-w-0 grid-cols-1 self-start" aria-hidden="true" inert>
+          {% include 'includes/faq-questions.html' with sizing=True only %}
+        </div>
       </div>
     </div>
   </div>
