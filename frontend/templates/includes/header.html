@@ -1,5 +1,5 @@
 {% load static %}
-<header data-site-header>
+<header class="group/header z-30 flex flex-col transition-opacity duration-300 ease-out data-[scroll-header=ready]:sticky data-[scroll-header=ready]:top-(--header-offset) data-[scroll-header=ready]:min-h-(--header-height) data-[nav-hidden=true]:pointer-events-none data-[nav-hidden=true]:opacity-0 motion-reduce:transition-none" data-site-header>
   <div class="bg-navy text-on-dark">
     <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-6 gap-y-2 px-4 py-2.5 text-xs leading-6 sm:px-6 lg:px-8">
       <div class="flex min-w-0 flex-wrap items-center gap-x-6 gap-y-1">
@@ -19,12 +19,12 @@
     </div>
   </div>
 
-  <div class="relative z-20 border-b border-navy/10 bg-surface/85 backdrop-blur-md">
+  <div class="relative z-20 mt-auto border-b border-navy/10 bg-surface/85 backdrop-blur-md">
     <div data-nav-container class="group/navbar mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-2 px-4 md:gap-x-3 lg:gap-x-4 lg:px-6 xl:gap-x-8 xl:px-8 data-[nav-layout=expanded]:flex-nowrap">
       {# Collapse before first paint; navigation remains in flow without JavaScript. #}
       <script>document.currentScript.parentElement.dataset.navLayout = 'collapsed';</script>
-      <a data-nav-brand class="flex min-w-0 items-center gap-2 group-data-[nav-layout=expanded]/navbar:shrink-0 group-data-[nav-layout=expanded]/navbar:whitespace-nowrap rounded-md py-3 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary sm:gap-3" href="{% url 'home' %}">
-        <img class="h-14 w-auto shrink-0 object-contain sm:h-16" src="{% static 'images/parsian_Logo.svg' %}" width="400" height="500" alt="">
+      <a data-nav-brand class="flex min-w-0 items-center gap-2 group-data-[nav-layout=expanded]/navbar:shrink-0 group-data-[nav-layout=expanded]/navbar:whitespace-nowrap rounded-md py-3 transition-[padding] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none group-data-[nav-measuring=true]/header:transition-none group-data-[nav-compact=true]/header:py-2 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary sm:gap-3" href="{% url 'home' %}">
+        <img class="h-14 w-auto shrink-0 object-contain transition-[height] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none group-data-[nav-measuring=true]/header:transition-none sm:h-16 group-data-[nav-compact=true]/header:h-10" src="{% static 'images/parsian_Logo.svg' %}" width="400" height="500" alt="">
         <span class="text-sm font-bold leading-7 sm:text-base">درب و پنجره پارسیان</span>
       </a>
 

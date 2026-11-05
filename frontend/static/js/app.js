@@ -1,4 +1,4 @@
-import { initializeHeader } from './header.js?v=20261104-scroll';
+import { initializeHeader } from './header.js?v=20261105-smooth-navbar';
 import { initializeProductCarousel } from './product-carousel.js?v=20261105-brands';
 import { initializeCarousel } from './carousel.js?v=20261105-brands';
 import { initializeWhyChoose } from './why-choose.js';

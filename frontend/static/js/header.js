@@ -11,6 +11,58 @@ export function initializeHeader(header) {
   let expanded = false;
   let scrollLock;
   const main = document.querySelector('main');
+  let lastScrollY = Math.max(0, window.scrollY);
+  let scrollDistance = 0;
+  let scrollFrame = 0;
+
+  function showHeader() {
+    header.dataset.navHidden = 'false';
+    scrollDistance = 0;
+  }
+
+  function updateScrollVisibility() {
+    scrollFrame = 0;
+    if (scrollLock) return;
+
+    // Clamp overscroll so mobile rubber-banding cannot reverse the direction.
+    const maximum = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+    const y = Math.min(maximum, Math.max(0, window.scrollY));
+    const delta = y - lastScrollY;
+    lastScrollY = y;
+
+    // Restore the full row before the contact strip re-enters the viewport.
+    const compactThreshold = header.offsetHeight
+      - (header.dataset.navCompact === 'true' ? 16 : 0);
+    const compact = String(y > compactThreshold);
+    if (header.dataset.navCompact !== compact) {
+      header.dataset.navCompact = compact;
+      updateHeaderOffset();
+    }
+
+    const keyboardFocus = header.contains(document.activeElement)
+      && document.activeElement.matches(':focus-visible');
+    if (y <= header.offsetHeight || keyboardFocus) {
+      showHeader();
+      return;
+    }
+    if (!delta) return;
+
+    scrollDistance = Math.sign(delta) === Math.sign(scrollDistance)
+      ? scrollDistance + delta : delta;
+    if (scrollDistance >= 32) {
+      header.dataset.navHidden = 'true';
+      scrollDistance = 0;
+    } else if (scrollDistance <= -20) {
+      showHeader();
+    }
+  }
+
+  function updateHeaderOffset() {
+    // Keep the contact strip in normal flow; only the navbar stays at the top.
+    const offset = header.getBoundingClientRect().height - container.parentElement.getBoundingClientRect().height;
+    header.style.setProperty('--header-offset', `${-offset}px`);
+    if (toggle.getAttribute('aria-expanded') === 'true') updateMenuBounds();
+  }
 
   navigation.querySelectorAll('a').forEach((link, index) => {
     link.style.setProperty('--menu-delay', `${60 + index * 70}ms`);
@@ -41,6 +93,8 @@ export function initializeHeader(header) {
       else document.body.setAttribute('style', previous.style);
       if (main) main.inert = previous.inert;
       window.scrollTo({ top: previous.y, behavior: 'instant' });
+      lastScrollY = previous.y;
+      scrollDistance = 0;
     }
   }
 
@@ -51,6 +105,7 @@ export function initializeHeader(header) {
   function setMenuOpen(open) {
     open = !expanded && open;
     if (open && container.dataset.menuOpen !== 'true') {
+      showHeader();
       navigation.scrollTop = 0;
       updateMenuBounds();
     }
@@ -68,6 +123,10 @@ export function initializeHeader(header) {
     const wasExpanded = expanded;
     const wasOpen = toggle.getAttribute('aria-expanded') === 'true';
     const focused = document.activeElement;
+    const wasCompact = header.dataset.navCompact === 'true';
+    // Measure final sizes without starting a resize animation.
+    header.dataset.navMeasuring = 'true';
+    header.dataset.navCompact = 'false';
 
     // Measure the full row at its current responsive spacing before collapsing.
     container.dataset.navLayout = 'expanded';
@@ -79,9 +138,15 @@ export function initializeHeader(header) {
     expanded = required <= available + 0.5;
 
     container.dataset.navLayout = expanded ? 'expanded' : 'collapsed';
+    // Reserve the original header space so shrinking never moves page content.
+    const fullHeight = header.firstElementChild.offsetHeight + container.parentElement.offsetHeight;
+    header.style.setProperty('--header-height', `${fullHeight}px`);
+    header.dataset.navCompact = String(wasCompact);
+    updateHeaderOffset();
     updateMenuBounds();
     toggle.hidden = expanded;
     setMenuOpen(!expanded && !wasExpanded && wasOpen);
+    delete header.dataset.navMeasuring;
 
     if (wasExpanded && !expanded && navigation.contains(focused)) toggle.focus({ preventScroll: true });
     if (focused === toggle) {
@@ -91,6 +156,17 @@ export function initializeHeader(header) {
   }
 
   updateLayout();
+  updateHeaderOffset();
+  header.dataset.scrollHeader = 'ready';
+  header.dataset.navHidden = 'false';
+  const headerObserver = new ResizeObserver(updateHeaderOffset);
+  headerObserver.observe(header);
+  headerObserver.observe(container.parentElement);
+  updateScrollVisibility();
+  header.addEventListener('focusin', showHeader);
+  window.addEventListener('scroll', () => {
+    if (!scrollFrame) scrollFrame = requestAnimationFrame(updateScrollVisibility);
+  }, { passive: true });
   let previousWidth;
   const resizeObserver = new ResizeObserver(([entry]) => {
     if (entry.contentRect.width === previousWidth) return;
