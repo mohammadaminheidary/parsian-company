@@ -1,0 +1,16 @@
+<svg class="size-full" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  {% if icon == 'upvc' %}
+    <rect x="4" y="4" width="40" height="40" rx="2"/>
+    <path d="M24 4v40M4 24h40"/>
+  {% elif icon == 'aluminium' %}
+    <rect x="5" y="3" width="38" height="42" rx="1"/>
+    <path d="M9 7h30v34H9zM24 7v34m4-19v4m-8-4v4"/>
+  {% elif icon == 'pleated-screen' %}
+    <rect x="4" y="5" width="40" height="38" rx="1"/>
+    <path d="M10 5v38m7-38v38m7-38v38m7-38v38m7-38v38"/>
+  {% elif icon == 'double-glazing' %}
+    <path d="M7 16 32 4v30L7 46V16Zm30 17 4-2V2l-5 2M13 27l12-13M15 33l12-13"/>
+  {% elif icon == 'repairs' %}
+    <path d="m8 5 5 2 2 6 24 24-5 5-24-24-6-2-2-5 6-6ZM28 18a10 10 0 0 1 12-13l-7 7 4 4 7-7a10 10 0 0 1-13 12L13 40a5 5 0 0 1-7-7l14-14M9 35l-1 1M28 29l8 8"/>
+  {% endif %}
+</svg>

@@ -1,21 +1,21 @@
-<section id="products" class="bg-surface py-14 sm:py-16 lg:py-20" aria-labelledby="products-heading" data-product-section>
-  <div class="mx-auto max-w-[1600px] px-4 sm:px-6 md:px-4 xl:px-6">
-    <div class="mb-8 lg:mb-10">
-      <div class="text-start">
-        <h2 id="products-heading" class="text-2xl font-bold leading-relaxed text-navy sm:text-3xl">محصولات و خدمات پارسیان</h2>
-        <p class="mt-2 text-sm font-light leading-7 text-ink/75 sm:text-base">ارائه کامل‌ترین محصولات و خدمات در زمینه درب و پنجره <bdi lang="en">UPVC</bdi> و آلومینیوم</p>
+<section id="products" class="bg-linear-to-br from-surface-blue to-surface-soft py-8 md:bg-linear-to-b md:from-surface md:to-surface-soft md:py-7" aria-labelledby="products-heading" data-product-section>
+  <div class="mx-auto md:max-w-[1600px] px-3 sm:px-6 md:px-8 lg:px-16 xl:px-24">
+    <header class="mb-5 md:flex md:items-center md:justify-between md:gap-4">
+      <div class="relative ps-4 before:absolute before:inset-y-0 before:start-0 before:w-1 before:rounded-full before:bg-primary md:ps-0 md:before:hidden">
+        <h2 id="products-heading" class="text-[1.45rem] leading-tight font-bold text-navy md:text-3xl">
+          <span class="md:hidden">محصولات و خدمات پارسیان</span>
+          <span class="hidden md:inline">محصولات و خدمات ما</span>
+        </h2>
+        <p class="mt-2 text-sm leading-relaxed font-light text-ink/85 md:leading-snug">ارائه کامل‌ترین محصولات و خدمات در زمینه درب و پنجره <bdi lang="en">UPVC</bdi> و آلومینیوم</p>
       </div>
-    </div>
-    <p id="products-scroll-hint" class="mb-2 flex items-center gap-2 text-xs font-light leading-6 text-ink/75 md:hidden">
-      <svg class="size-5 shrink-0 text-primary-strong" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16m-4-4 4 4-4 4M8 8l-4 4 4 4"/></svg>
-      <span>برای مشاهده بیشتر بکشید<span class="sr-only"> برای پیمایش با صفحه‌کلید، از کلیدهای پیکان استفاده کنید.</span></span>
-    </p>
-    <ul class="grid auto-cols-[calc((100%_-_1rem)/1.5)] grid-flow-col grid-rows-[auto_auto_auto] snap-x snap-mandatory gap-x-4 overflow-x-auto overscroll-x-contain scroll-smooth pb-3 pt-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden focus-visible:outline-2 focus-visible:outline-primary motion-reduce:scroll-auto md:auto-cols-auto md:grid-flow-row md:grid-cols-5 md:gap-x-1.5 md:overflow-visible md:pb-0 xl:gap-x-2" tabindex="0" aria-label="محصولات و خدمات" aria-describedby="products-scroll-hint" data-product-track>
-      {% include 'includes/product-item.html' with title='درب و پنجره' code='UPVC' description='پنجره‌ای رو به آسایش' image='upvc' alt='قاب‌های درب و پنجره در کارگاه پارسیان' only %}
-      {% include 'includes/product-item.html' with title='درب و پنجره آلومینیوم' description='ظرافت در قاب معماری' image='aluminium' alt='قاب آلومینیومی درب و پنجره' only %}
-      {% include 'includes/product-item.html' with title='توری پلیسه درب و پنجره کشویی' description='هوای تازه، آسودگی بیشتر' image='pleated-screen' alt='توری محافظ حشرات روی قاب پنجره' only %}
-      {% include 'includes/product-item.html' with title='شیشه دوجداره' description='شفافیت در کنار آرامش' image='double-glazing' alt='نمای نزدیک شیشه و قاب پنجره دوجداره' only %}
-      {% include 'includes/product-item.html' with title='تعمیر و تعویض' description='رسیدگی به درب و پنجره شما' image='repairs' alt='نصب و تنظیم پنجره توسط تعمیرکار' only %}
+      <a href="#products-list" class="hidden shrink-0 items-center gap-2 rounded-sm text-sm font-bold text-primary-strong focus-visible:outline-2 focus-visible:outline-offset-4 md:inline-flex">
+        مشاهده همه محصولات
+        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12H4m6-6-6 6 6 6"/></svg>
+      </a>
+    </header>
+
+    <ul id="products-list" class="scroll-mt-24 focus-visible:outline-2 focus-visible:outline-primary md:grid md:grid-cols-5 md:gap-4" role="list" tabindex="-1" aria-labelledby="products-heading">
+      {% include 'includes/product-items.html' only %}
     </ul>
   </div>
 </section>
