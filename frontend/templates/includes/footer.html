@@ -25,10 +25,12 @@
       </div>
     </div>
 
-    <div class="relative mt-5 flex min-h-26 flex-col items-center justify-center gap-2 border-t border-on-dark/12 py-5 ps-12 pe-0 text-center md:mt-7 md:min-h-24 md:px-12">
+    <div class="relative mt-5 flex min-h-26 flex-col items-center justify-center gap-2 border-t border-on-dark/12 px-5 py-5 text-center md:mt-7 md:min-h-24 md:px-12">
       <span class="inline-flex items-center gap-2 text-[11px] leading-6 text-[#C8D7E6]/80" aria-disabled="true" title="صفحه ورود مدیریت هنوز در دسترس نیست">{% include 'includes/footer-icon.html' with name='lock' only %}ورود به پنل مدیریت<span class="sr-only">؛ به‌زودی</span></span>
       <p class="text-[11px] font-light leading-6 text-[#C8D7E6]/80">© {% now 'Y' %} تمامی حقوق برای درب و پنجره پارسیان محفوظ است.</p>
-      <button class="absolute left-0 top-5 inline-flex size-11 cursor-pointer items-center justify-center rounded-full bg-primary text-on-dark transition-colors hover:bg-primary-strong focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent motion-reduce:transition-none" type="button" aria-label="بازگشت به بالای صفحه" data-back-to-top hidden>{% include 'includes/footer-icon.html' with name='up' only %}</button>
     </div>
   </div>
+  <button class="invisible fixed right-[max(1rem,env(safe-area-inset-right))] bottom-[max(1rem,env(safe-area-inset-bottom))] z-20 inline-flex size-11 cursor-pointer items-center justify-center rounded-full border border-white/40 bg-primary-strong/80 text-on-dark opacity-0 shadow-md backdrop-blur-md transition-[opacity,visibility,background-color] duration-300 ease-out hover:bg-primary-strong focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary data-[visible=true]:visible data-[visible=true]:opacity-100 motion-reduce:transition-none" type="button" aria-label="بازگشت به بالای صفحه" data-back-to-top inert>
+    {% include 'includes/footer-icon.html' with name='up' only %}
+  </button>
 </footer>

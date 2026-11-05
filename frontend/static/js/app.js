@@ -5,7 +5,7 @@ import { initializeWhyChoose } from './why-choose.js';
 import { initializePortfolio } from './portfolio.js?v=20261105-portfolio-scale';
 import { initializeCounters } from './counters.js';
 import { initializeFaq } from './faq.js';
-import { initializeFooter } from './footer.js';
+import { initializeFooter } from './footer.js?v=20261106-back-to-top';
 
 initializeHeader(document.querySelector('[data-site-header]'));
 document.querySelectorAll('[data-product-section]').forEach(revealProducts);

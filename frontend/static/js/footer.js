@@ -10,7 +10,16 @@ export function initializeFooter(footer) {
   });
 
   const backToTop = footer.querySelector('[data-back-to-top]');
-  backToTop.hidden = false;
+  function updateBackToTop() {
+    const visible = window.scrollY > 160;
+    if (backToTop.inert === !visible) return;
+    backToTop.inert = !visible;
+    backToTop.dataset.visible = String(visible);
+  }
+
+  window.addEventListener('scroll', updateBackToTop, { passive: true });
+  window.addEventListener('pageshow', updateBackToTop);
+  updateBackToTop();
   backToTop.addEventListener('click', () => {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     window.scrollTo({ top: 0, behavior: reducedMotion ? 'instant' : 'smooth' });
